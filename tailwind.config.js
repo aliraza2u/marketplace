@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors: {
         night: "#05050F",
+        textBlack: "#04040C",
       },
       backgroundColor: (theme) => ({
         ...theme("colors"),
