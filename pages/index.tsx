@@ -6,6 +6,7 @@ import { marketplaceContractAddress } from "../addresses";
 import BeatLoader from "react-spinners/BeatLoader";
 import Button from "../components/Button";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const override: CSSProperties = {
   display: "block",
@@ -18,50 +19,61 @@ export default function Home() {
   const { data, isLoading, error } = useActiveListings(contract);
 
   return (
-    <div className="">
-      <Headers />
-      {/* Explore Marketplace */}
-      <div className="my-[90px] px-[75px]">
-        <h1 className="text-[59px] font-semibold text-white text-center mb-12">
-          Explore Marketplace
-        </h1>
-        {isLoading && (
-          <div className="flex justify-center w-full">
-            <BeatLoader
-              color={"#ffffff32"}
-              loading={isLoading}
-              cssOverride={override}
-              size={30}
-              speedMultiplier={1}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
-          </div>
-        )}
-        <div className="grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
-          {data &&
-            data?.map((item) => (
-              <NftCard
-                key={item.id}
-                name={item.asset.name}
-                user={'@zinksu'}
-                symbol={item.buyoutCurrencyValuePerToken.symbol}
-                price={item.buyoutCurrencyValuePerToken.displayValue}
-                image={item.asset.image}
-                onClick={() => router.push(`/listing/${item.id}`)}
-              />
-            ))}
-        </div>
-        {!isLoading && (
-          <div className="text-center">
-            <Button className="rouded-button text-white text-lg font-medium">View More</Button>
-          </div>
-        )}
-      </div>
-      {/* Newly listed */}
+    <>
+      <Head>
+        <title>Nitfee Marketplace</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="List Your NFTs For Sale, Accept Bids, and Buy NFTs" />
+        <meta
+          name="keywords"
+          content="Thirdweb, Marketplace, NFT Marketplace Tutorial, NFT Auction Tutorial, How To Make OpenSea"
+        />
+      </Head>
       <div className="">
-
+        <Headers />
+        {/* Explore Marketplace */}
+        <div className="my-[90px] px-[75px]">
+          <h1 className="text-[59px] font-semibold text-white text-center mb-12">
+            Explore Marketplace
+          </h1>
+          {isLoading && (
+            <div className="flex justify-center w-full">
+              <BeatLoader
+                color={"#ffffff32"}
+                loading={isLoading}
+                cssOverride={override}
+                size={30}
+                speedMultiplier={1}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </div>
+          )}
+          <div className="grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
+            {data &&
+              data?.map((item) => (
+                <NftCard
+                  key={item.id}
+                  name={item.asset.name}
+                  user={"@user"}
+                  symbol={item.buyoutCurrencyValuePerToken.symbol}
+                  price={item.buyoutCurrencyValuePerToken.displayValue}
+                  image={item.asset.image}
+                  onClick={() => router.push(`/listing/${item.id}`)}
+                />
+              ))}
+          </div>
+          {!isLoading && (
+            <div className="text-center mt-12">
+              <Button className="rouded-button text-white text-lg font-medium">View More</Button>
+            </div>
+          )}
+        </div>
+        {/* Newly listed */}
+        <div className="my-[90px] px-[75px]">
+          <h1 className="text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
