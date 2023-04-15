@@ -7,17 +7,17 @@ interface INftCardProps {
   price: string | number | null | undefined;
   symbol: string;
   image: string | null | undefined;
+  onClick: () => void;
 }
 
-const NftCard: FC<INftCardProps> = ({ name, image, price, symbol }) => {
+const NftCard: FC<INftCardProps> = ({ name, image, price, symbol, onClick }) => {
   return (
-    <div className="nft-card flex flex-col items-center gap-[27px] px-[10px] py-[15px]  w-[297px] h-[400px] rounded-[20px] bg-[#FFFFFF1A] mb-11">
+    <div
+      className="nft-card flex flex-col items-center gap-[27px] px-[10px] py-[15px]  w-[297px] h-[400px] rounded-[20px] bg-[#FFFFFF1A] mb-11"
+      onClick={onClick}
+    >
       {name && image && (
-        <img
-          src={image}
-          alt={""}
-          className="w-[276px] h-[307px] rounded-[14px] object-cover"
-        />
+        <img src={image} alt={""} className="w-[276px] h-[307px] rounded-[14px] object-cover" />
       )}
       <div className="flex justify-between w-full">
         <h4 className="font-medium text-white mb-0 capitalize">{name}</h4>

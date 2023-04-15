@@ -5,6 +5,7 @@ import NftCard from "../components/NftCard";
 import { marketplaceContractAddress } from "../addresses";
 import BeatLoader from "react-spinners/BeatLoader";
 import Button from "../components/Button";
+import { useRouter } from "next/router";
 
 const override: CSSProperties = {
   display: "block",
@@ -12,9 +13,9 @@ const override: CSSProperties = {
 };
 
 export default function Home() {
+  const router = useRouter();
   const { contract } = useContract(marketplaceContractAddress, "marketplace");
   const { data, isLoading, error } = useActiveListings(contract);
-  let [color, setColor] = useState("#ffffff");
 
   return (
     <div className="">
@@ -46,6 +47,7 @@ export default function Home() {
                 symbol={item.buyoutCurrencyValuePerToken.symbol}
                 price={item.buyoutCurrencyValuePerToken.displayValue}
                 image={item.asset.image}
+                onClick={() => router.push(`/listing/${item.id}`)}
               />
             ))}
         </div>
@@ -55,6 +57,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      {/* Newly listed */}
     </div>
   );
 }
