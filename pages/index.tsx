@@ -1,6 +1,6 @@
 import React, { useState, CSSProperties } from "react";
 import { useActiveListings, useContract } from "@thirdweb-dev/react";
-import Headers from "../components/HeaderV1";
+import Headers from "../components/Header";
 import NftCard from "../components/NftCard";
 import { marketplaceContractAddress } from "../addresses";
 import BeatLoader from "react-spinners/BeatLoader";
