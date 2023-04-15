@@ -4,6 +4,7 @@ import Headers from "../components/Header";
 import NftCard from "../components/NftCard";
 import { marketplaceContractAddress } from "../addresses";
 import BeatLoader from "react-spinners/BeatLoader";
+import Button from "../components/Button";
 
 const override: CSSProperties = {
   display: "block",
@@ -48,6 +49,11 @@ export default function Home() {
               />
             ))}
         </div>
+        {!isLoading && (
+          <div className="text-center">
+            <Button className="rouded-button text-white text-lg font-medium">View More</Button>
+          </div>
+        )}
       </div>
     </div>
   );
