@@ -6,24 +6,28 @@ interface INftCardProps {
   name: string | number | null | undefined;
   price: string | number | null | undefined;
   symbol: string;
+  user: string;
   image: string | null | undefined;
   onClick: () => void;
 }
 
-const NftCard: FC<INftCardProps> = ({ name, image, price, symbol, onClick }) => {
+const NftCard: FC<INftCardProps> = ({ name, image, price, symbol, user, onClick }) => {
   return (
     <div
-      className="nft-card flex flex-col items-center gap-[27px] px-[10px] py-[15px]  w-[297px] h-[400px] rounded-[20px] bg-[#FFFFFF1A] mb-11"
+      className="nft-card flex flex-col items-center gap-[27px] px-[10px] py-[15px]  w-[297px] h-[425px] rounded-[20px] bg-[#FFFFFF1A] mb-11"
       onClick={onClick}
     >
       {name && image && (
         <img src={image} alt={""} className="w-[276px] h-[307px] rounded-[14px] object-cover" />
       )}
-      <div className="flex justify-between w-full">
-        <h4 className="font-medium text-white mb-0 capitalize">{name}</h4>
-        <h4 className="nft-price text-lg font-bold  mb-0">
-          {price} {symbol}
-        </h4>
+      <div className="w-full">
+        <div className="flex justify-between">
+          <h4 className="font-medium text-white mb-0 capitalize">{name}</h4>
+          <h4 className="nft-price text-lg font-bold  mb-0">
+            {price} {symbol}
+          </h4>
+        </div>
+        <p className="text-xs font-normal text-white">{user}</p>
       </div>
       <Button className="hidden text-[19px] font-medium text-white rounded-xl w-full py-4  collect-button">
         Collect Now

@@ -44,6 +44,7 @@ export default function Home() {
               <NftCard
                 key={item.id}
                 name={item.asset.name}
+                user={'@zinksu'}
                 symbol={item.buyoutCurrencyValuePerToken.symbol}
                 price={item.buyoutCurrencyValuePerToken.displayValue}
                 image={item.asset.image}
@@ -58,6 +59,9 @@ export default function Home() {
         )}
       </div>
       {/* Newly listed */}
+      <div className="">
+
+      </div>
     </div>
   );
 }
