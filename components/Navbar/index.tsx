@@ -27,8 +27,8 @@ const Navbar: FC = () => {
 
   return (
     <div
-      className={`flex justify-between items-center px-[78px] bg-transparent w-full fixed z-10 py-4 ${
-        color ? "bg-night" : ""
+      className={`flex justify-between items-center px-[78px] w-full fixed z-10 py-4 ${
+        color ? "bg-night py-2" : "bg-transparent"
       }`}
     >
       <div className="flex items-center gap-2">
