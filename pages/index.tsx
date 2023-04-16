@@ -51,7 +51,7 @@ export default function Home() {
               Create and Sell Your NFTs <Image src={circleIcon} alt="Create and Sell Your NFTs" />
             </h5>
           </div>
-          <div className="flex justify-center gap-[28px] mt-[82px]">
+          <div className="flex justify-center items-end gap-[28px] mt-12 h-[438px]">
             {NFT_STEPS?.map((step) => (
               <NftStep
                 key={step.step}

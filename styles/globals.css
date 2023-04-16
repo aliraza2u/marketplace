@@ -113,8 +113,58 @@ select {
 .tr:nth-child(odd) {
   background-color: #1f1f21;
 }
-.steps-text {
+.nft-step-title {
   writing-mode: vertical-rl;
+}
+.nft-step-box {
+  transition: width 1s, height 1s;
+  padding: 20px;
+}
+.nft-step-box:hover {
+  width: 480px;
+  height: 438px;
+}
+.nft-step-box:hover .nft-step-count {
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 1;
+}
+.nft-step-box:hover .nft-step-title {
+  writing-mode: inherit;
+  word-break: keep-all;
+  display: block;
+  height: 100%;
+}
+.nft-step-box:hover .nft-step-title .nft-step-name {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  z-index: 1;
+  -webkit-animation: fadeIn .6s;
+  animation: fadeIn .6s;
+}
+.nft-step-box:hover .nft-step-image {
+  display: block;
+  height: 100%;
+}
+.nft-step-box:hover .nft-step-line {
+  display: none;
+}
+.nft-step-box:hover .nft-trans-left-img {
+  display: block;
+}
+.nft-step-box:hover .nft-trans-bottom-img {
+  display: block;
+}
+
+.nft-step-box:hover .nft-step-description {
+  display: block;
+  position: absolute;
+  top: 60%;
+  left: 8%;
+  -webkit-animation: fadeIn 1.2s;
+  animation: fadeIn 1.2s;
 }
 
 /* //Slider */
@@ -129,4 +179,28 @@ select {
 .slick-dots li button:before {
   color: #d9d8e2 !important;
   font-size: 30px !important;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
