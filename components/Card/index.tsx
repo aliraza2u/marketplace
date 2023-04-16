@@ -14,19 +14,19 @@ interface ICardProps {
 
 const Card: FC<ICardProps> = ({ name, image, price, symbol, user, onClick }) => {
   return (
-    <div className="w-[400px] h-[588px]" onClick={onClick}>
+    <div className="w-[300px] h-[588px]" onClick={onClick}>
       <div className="">
         {image && (
-          <img src={image} alt="" className="w-[400px] h-[455px] rounded-[20px] object-cover" />
+          <img src={image} alt="" className="w-[300px] h-[400px] rounded-[20px] object-cover" />
         )}
       </div>
       <div className="flex justify-center relative bottom-[75px]">
-        <div className="w-[368px] h-[197px] bg-[#F2F2F2] rounded-3xl p-6 flex flex-col justify-between">
+        <div className="w-[270px] h-[165px] bg-[#F2F2F2] rounded-3xl p-4 flex flex-col justify-between">
           <div className="flex justify-between gap-4">
-            <h5 className=" capitalize text-[22px] font-extrabold text-textBlack">
+            <h5 className=" capitalize font-extrabold text-textBlack">
               {"Lighting Axe"}
             </h5>
-            <h5 className="nft-price text-[22px] font-extrabold uppercase">
+            <h5 className="nft-price text-[18px] font-extrabold uppercase">
               {"100 "}
               {"cfx"}
             </h5>
@@ -39,7 +39,7 @@ const Card: FC<ICardProps> = ({ name, image, price, symbol, user, onClick }) => 
             />
             <h3 className="capitalize text-xl font-medium">{"Loura chin"}</h3>
           </div>
-          <Button className="text-[19px] font-medium text-white rounded-xl w-full py-4  collect-button">
+          <Button className="text-[19px] font-medium text-white rounded-xl w-full py-2  collect-button">
             Buy it now
           </Button>
         </div>

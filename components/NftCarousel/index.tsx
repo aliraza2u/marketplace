@@ -42,16 +42,16 @@ const settings = {
   dots: true,
   infinite: false,
   speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 2,
+  slidesToShow: 4,
+  slidesToScroll: 4,
   initialSlide: 0,
   arrows: false,
   responsive: [
     {
-      breakpoint: 1380,
+      breakpoint: 1420,
       settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToShow: 3,
+        slidesToScroll: 3,
         infinite: true,
         dots: true,
       },

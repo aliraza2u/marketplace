@@ -20,6 +20,7 @@ export default function Home() {
   const router = useRouter();
   const { contract } = useContract(marketplaceContractAddress, "marketplace");
   const { data, isLoading, error } = useActiveListings(contract);
+  
 
   return (
     <>
