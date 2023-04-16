@@ -20,7 +20,6 @@ export default function Home() {
   const router = useRouter();
   const { contract } = useContract(marketplaceContractAddress, "marketplace");
   const { data, isLoading, error } = useActiveListings(contract);
-  
 
   return (
     <>
@@ -60,7 +59,7 @@ export default function Home() {
           )}
           {!isLoading && (
             <div className="text-center mt-12">
-              <Button className="rouded-button text-white text-lg font-medium">View More</Button>
+              <Button type="rounded">View More</Button>
             </div>
           )}
         </div>
