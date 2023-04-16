@@ -19,13 +19,13 @@ const Button: FC<ICustomButtonProps> = ({
 }: ICustomButtonProps) => {
   return (
     <button
-      className={`${className} ${
+      className={` ${
         type === "rounded"
           ? "rouded-button text-white text-lg font-medium"
           : type === "transparent"
-          ? "px-6 py-3 rounded-xl bg-[#141B22]"
-          : "text-[19px] font-medium text-white rounded-xl py-2  collect-button"
-      } `}
+          ? `px-6 py-3 rounded-xl bg-[#141B22]`
+          : ` text-[19px] font-medium text-white rounded-xl px-6 py-2 collect-button`
+      } ${className}`}
       disabled={loading || disabled}
       onClick={onClick}
     >

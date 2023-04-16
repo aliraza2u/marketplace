@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import contactImage from "../../public/images/contact-us.png";
+import Button from "../Button";
 
 const Contact = () => {
   return (
@@ -17,6 +18,16 @@ const Contact = () => {
           curated selection of top news, market updates, and exclusive content delivered straight to
           your inbox!
         </p>
+        <div className="flex gap-10 w-full mt-[60px]">
+          <div className="w-[75%] bg-[#FFFFFF1A] rounded-full p-4">
+            <input
+              className="w-full   p-4 text-textLight"
+              placeholder="Enter your email address"
+              style={{ all: "unset" }}
+            />
+          </div>
+          <Button className="" type="rounded">Subscribe</Button>
+        </div>
       </div>
     </div>
   );
