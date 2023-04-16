@@ -14,14 +14,14 @@ interface ICardProps {
 
 const Card: FC<ICardProps> = ({ name, image, price, symbol, user, onClick }) => {
   return (
-    <div className="w-[300px] h-[588px]" onClick={onClick}>
+    <div className="w-[280px] h-[588px]" onClick={onClick}>
       <div className="">
         {image && (
-          <img src={image} alt="" className="w-[300px] h-[400px] rounded-[20px] object-cover" />
+          <img src={image} alt="" className="w-[280px] h-[370px] rounded-[20px] object-cover" />
         )}
       </div>
       <div className="flex justify-center relative bottom-[75px]">
-        <div className="w-[270px] h-[165px] bg-[#F2F2F2] rounded-3xl p-4 flex flex-col justify-between">
+        <div className="w-[240px] h-[155px] bg-[#F2F2F2] rounded-3xl p-4 flex flex-col justify-between">
           <div className="flex justify-between gap-4">
             <h5 className=" capitalize font-extrabold text-textBlack">
               {"Lighting Axe"}

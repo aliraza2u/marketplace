@@ -48,7 +48,7 @@ const settings = {
   arrows: false,
   responsive: [
     {
-      breakpoint: 1420,
+      breakpoint: 1325,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,

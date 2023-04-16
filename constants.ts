@@ -30,3 +30,13 @@ export const NFT_STEPS = [
       "Choose between auctions, fixed-price listings, and declining-price listings. You choose how you want to sell your NFTs, and we help you sell them!",
   },
 ];
+
+export const CATEGORIES = [
+  "Long added ",
+  "Art",
+  "Gaming",
+  "Sports",
+  "Photography",
+  "Music",
+  "Virtual Worlds",
+];

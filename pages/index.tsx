@@ -16,7 +16,7 @@ import starIcon from "../public/images/star.svg";
 import circleIcon from "../public/images/circle.svg";
 import NftSteps from "../components/NftStep";
 import NftStep from "../components/NftStep";
-import { NFT_STEPS } from "../constants";
+import { CATEGORIES, NFT_STEPS } from "../constants";
 
 const override: CSSProperties = {
   display: "block",
@@ -67,6 +67,13 @@ export default function Home() {
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">
             Explore Marketplace
           </h1>
+          <div className="flex justify-center gap-5 mb-12">
+            {CATEGORIES?.map((category, i) => (
+              <Button key={category} type="rounded" className="">
+                {category}
+              </Button>
+            ))}
+          </div>
           {isLoading ? (
             <Loading isLoading={isLoading} />
           ) : (
