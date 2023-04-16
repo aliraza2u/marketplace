@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { FC } from "react";
 import Button from "../Button";
+import userIcon from "../../public/images/user-icon.png";
 
 interface ICardProps {
   name: string | number | null | undefined;
@@ -13,27 +14,36 @@ interface ICardProps {
 
 const Card: FC<ICardProps> = ({ name, image, price, symbol, user, onClick }) => {
   return (
-    <div className="w-[400px] h-[588px]">
-      <div className="h-[455px] rounded-[20px]">{/* <Image src={''} alt="" /> */}</div>
-      <div className="w-[368px] h-[197px]">
-        <h5 className=" capitalize">{"d"}</h5>
-        <h5 className="nft-price text-[20px] font-bold uppercase">
-          {"d"}
-          {"cfx"}
-        </h5>
+    <div className="w-[400px] h-[588px]" onClick={onClick}>
+      <div className="">
+        {image && (
+          <img src={image} alt="" className="w-[400px] h-[455px] rounded-[20px] object-cover" />
+        )}
       </div>
-      <div className="w-full">
-        <div className="flex justify-between">
-          <h4 className="font-medium text-textBlack mb-0 capitalize">{name}</h4>
-          <h4 className="nft-price text-lg font-bold  mb-0">
-            {price} {symbol}
-          </h4>
+      <div className="flex justify-center relative bottom-[75px]">
+        <div className="w-[368px] h-[197px] bg-[#F2F2F2] rounded-3xl p-6 flex flex-col justify-between">
+          <div className="flex justify-between gap-4">
+            <h5 className=" capitalize text-[22px] font-extrabold text-textBlack">
+              {"Lighting Axe"}
+            </h5>
+            <h5 className="nft-price text-[22px] font-extrabold uppercase">
+              {"100 "}
+              {"cfx"}
+            </h5>
+          </div>
+          <div className="flex gap-[10px] items-center">
+            <Image
+              src={userIcon}
+              alt="marketplan"
+              className="w-9 h-9 rounded-full object-contain"
+            />
+            <h3 className="capitalize text-xl font-medium">{"Loura chin"}</h3>
+          </div>
+          <Button className="text-[19px] font-medium text-white rounded-xl w-full py-4  collect-button">
+            Buy it now
+          </Button>
         </div>
-        <p className="text-lg font-normal text-textBlack">{user}</p>
       </div>
-      <Button className="hidden text-[19px] font-medium text-white rounded-xl w-full py-4  collect-button">
-        Buy it now
-      </Button>
     </div>
   );
 };

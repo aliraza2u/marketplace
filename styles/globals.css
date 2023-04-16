@@ -100,3 +100,17 @@ select {
   background-clip: text;
   text-fill-color: transparent;
 }
+
+/* //Slider */
+.slick-dots {
+  bottom: -60px !important;
+}
+.slick-dots li {
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 12px !important;
+}
+.slick-dots li button:before {
+  color: #d9d8e2 !important;
+  font-size: 30px !important;
+}

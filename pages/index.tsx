@@ -7,6 +7,9 @@ import BeatLoader from "react-spinners/BeatLoader";
 import Button from "../components/Button";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { zeroPad } from "ethers/lib/utils";
+import NftCarousel from "../components/NftCarousel";
+import Loading from "../components/Loading";
 
 const override: CSSProperties = {
   display: "block",
@@ -32,37 +35,28 @@ export default function Home() {
       <div className="">
         <Headers />
         {/* Explore Marketplace */}
-        <div className="my-[90px] px-[75px]">
+        <div className="my-[120px] px-[75px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">
             Explore Marketplace
           </h1>
-          {isLoading && (
-            <div className="flex justify-center w-full">
-              <BeatLoader
-                color={"#ffffff32"}
-                loading={isLoading}
-                cssOverride={override}
-                size={30}
-                speedMultiplier={1}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
+          {isLoading ? (
+            <Loading isLoading={isLoading} />
+          ) : (
+            <div className="grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
+              {data &&
+                data?.map((item) => (
+                  <NftCard
+                    key={item.id}
+                    name={item.asset.name}
+                    user={"@user"}
+                    symbol={item.buyoutCurrencyValuePerToken.symbol}
+                    price={item.buyoutCurrencyValuePerToken.displayValue}
+                    image={item.asset.image}
+                    onClick={() => router.push(`/listing/${item.id}`)}
+                  />
+                ))}
             </div>
           )}
-          <div className="grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
-            {data &&
-              data?.map((item) => (
-                <NftCard
-                  key={item.id}
-                  name={item.asset.name}
-                  user={"@user"}
-                  symbol={item.buyoutCurrencyValuePerToken.symbol}
-                  price={item.buyoutCurrencyValuePerToken.displayValue}
-                  image={item.asset.image}
-                  onClick={() => router.push(`/listing/${item.id}`)}
-                />
-              ))}
-          </div>
           {!isLoading && (
             <div className="text-center mt-12">
               <Button className="rouded-button text-white text-lg font-medium">View More</Button>
@@ -70,8 +64,15 @@ export default function Home() {
           )}
         </div>
         {/* Newly listed */}
-        <div className="my-[90px] px-[75px]">
+        <div className="my-[120px] px-[75px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
+          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
+        </div>
+
+        {/* Recently Sold */}
+        <div className="my-[120px] px-[75px]">
+          <h1 className="text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
+          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
       </div>
     </>
