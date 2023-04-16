@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         night: "#05050F",
         textBlack: "#04040C",
+        textLight: "#F2F2F2",
       },
       backgroundColor: (theme) => ({
         ...theme("colors"),

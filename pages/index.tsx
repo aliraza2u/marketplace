@@ -10,6 +10,7 @@ import Head from "next/head";
 import { zeroPad } from "ethers/lib/utils";
 import NftCarousel from "../components/NftCarousel";
 import Loading from "../components/Loading";
+import Contact from "../components/Contact";
 
 const override: CSSProperties = {
   display: "block",
@@ -35,7 +36,7 @@ export default function Home() {
       <div className="">
         <Headers />
         {/* Explore Marketplace */}
-        <div className="my-[120px] px-[75px]">
+        <div className="my-[120px] px-[75px] min-h-[600px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">
             Explore Marketplace
           </h1>
@@ -59,20 +60,24 @@ export default function Home() {
           )}
           {!isLoading && (
             <div className="text-center mt-12">
-              <Button className="rouded-button text-white text-lg font-medium">View More</Button>
+              <Button type="rounded">View More</Button>
             </div>
           )}
         </div>
         {/* Newly listed */}
-        <div className="my-[120px] px-[75px]">
+        <div className="my-[120px] px-[75px] min-h-[600px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
 
-        {/* Recently Sold */}
-        <div className="my-[120px] px-[75px]">
+        {/* Recently sold */}
+        <div className="my-[120px] px-[75px] min-h-[600px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
+        </div>
+        {/* Contact us */}
+        <div className="my-[120px] px-[75px]">
+          <Contact />
         </div>
       </div>
     </>

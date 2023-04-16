@@ -47,7 +47,7 @@ const Navbar: FC = () => {
         ))}
       </div>
       <div className="flex gap-5">
-        <Button className="uppercase font-bold text-base text-white flex gap-2 items-center px-6 py-3 rounded-xl bg-[#141B22]">
+        <Button className="uppercase font-bold text-base text-white flex gap-2 items-center" type="transparent">
           <Image src={discord} alt="marketplan nitfee discord" className="w-6 h-4 object-contain" />
           Discord
         </Button>
