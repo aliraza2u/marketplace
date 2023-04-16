@@ -10,6 +10,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  color: white;
 }
 
 /* Set core body defaults */
@@ -91,4 +92,11 @@ select {
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
+}
+.text-gradient {
+  background: linear-gradient(98.31deg, #ff8d8d -20.73%, #7d12e7 71.91%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }

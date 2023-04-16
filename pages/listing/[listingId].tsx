@@ -7,12 +7,7 @@ import {
   useCancelListing,
   Web3Button,
 } from "@thirdweb-dev/react";
-import {
-  ChainId,
-  ListingType,
-  Marketplace,
-  NATIVE_TOKENS,
-} from "@thirdweb-dev/sdk";
+import { ChainId, ListingType, Marketplace, NATIVE_TOKENS } from "@thirdweb-dev/sdk";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -38,17 +33,10 @@ const ListingPage: NextPage = () => {
   // const { contract } = useContract(marketplaceContractAddress, "marketplace");
   console.log(contract, "contract");
 
-  const {
-    mutateAsync: cancelListing,
-    isLoading,
-    error,
-  } = useCancelListing(contract);
+  const { mutateAsync: cancelListing, isLoading, error } = useCancelListing(contract);
 
   // Fetch the listing from the marketplace contract
-  const { data: listing, isLoading: loadingListing } = useListing(
-    contract,
-    listingId
-  );
+  const { data: listing, isLoading: loadingListing } = useListing(contract, listingId);
 
   // Store the bid amount the user entered into the bidding textbox
   const [bidAmount, setBidAmount] = useState<string>("");
@@ -61,6 +49,7 @@ const ListingPage: NextPage = () => {
     return <div className={styles.loadingOrError}>Listing not found</div>;
   }
 
+  console.log(listing, "listing");
   async function createBidOrOffer() {
     try {
       // Ensure user is on the correct network
@@ -75,7 +64,7 @@ const ListingPage: NextPage = () => {
           listingId, // The listingId of the listing we want to make an offer for
           1, // Quantity = 1
           NATIVE_TOKENS[ChainId.Goerli].wrapped.address, // Wrapped Ether address on Goerli
-          bidAmount // The offer amount the user entered
+          bidAmount, // The offer amount the user entered
         );
       }
 
@@ -84,11 +73,7 @@ const ListingPage: NextPage = () => {
         await contract?.auction.makeBid(listingId, bidAmount);
       }
 
-      alert(
-        `${
-          listing?.type === ListingType.Auction ? "Bid" : "Offer"
-        } created successfully!`
-      );
+      alert(`${listing?.type === ListingType.Auction ? "Bid" : "Offer"} created successfully!`);
     } catch (error) {
       console.error(error);
       alert(error);
@@ -113,30 +98,40 @@ const ListingPage: NextPage = () => {
   }
 
   return (
-    <div className={styles.container} style={{}}>
+    <div className={styles.container}>
+      <h2 className="font-extrabold text-[64px] leading-[77px] tracking-wide mt-[190px] mb-[100px]">
+        Our Best creators
+      </h2>
+
       <div className={styles.listingContainer}>
         <div className={styles.leftListing}>
           <MediaRenderer
             src={listing.asset.image}
-            className={styles.mainNftImage}
+            className="w-[552px] h-auto max-w-full"
+            width="552"
+            height="552"
           />
         </div>
 
         <div className={styles.rightListing}>
-          <h1>{listing.asset.name}</h1>
+          <h1 className="font-extrabold text-[48px] leading-[58px] tracking-wide mb-4">
+            {listing.asset.name?.toString().split("#")[0]}
+          </h1>
+          <div className="flex mb-10">
+            <p className="text-[#B2B2B2] font-medium text-xl leading-6 tracking-wide mr-5">
+              Current Price:
+            </p>
+            <p className="font-extrabold text-[22px] leading-7 tracking-wide text-gradient">
+              {listing.buyoutCurrencyValuePerToken.displayValue}{" "}
+              {listing.buyoutCurrencyValuePerToken.symbol}
+            </p>
+          </div>
           <p>
             Owned by{" "}
             <b>
-              {listing.sellerAddress?.slice(0, 6) +
-                "..." +
-                listing.sellerAddress?.slice(36, 40)}
+              {listing.sellerAddress?.slice(0, 6) + "..." + listing.sellerAddress?.slice(36, 40)}
             </b>
           </p>
-
-          <h2>
-            <b>{listing.buyoutCurrencyValuePerToken.displayValue}</b>{" "}
-            {listing.buyoutCurrencyValuePerToken.symbol}
-          </h2>
 
           <div
             style={{
@@ -146,11 +141,7 @@ const ListingPage: NextPage = () => {
               alignItems: "center",
             }}
           >
-            <button
-              style={{ borderStyle: "none" }}
-              className={styles.mainButton}
-              onClick={buyNft}
-            >
+            <button style={{ borderStyle: "none" }} className={styles.mainButton} onClick={buyNft}>
               Buy
             </button>
             <p style={{ color: "grey" }}>|</p>
