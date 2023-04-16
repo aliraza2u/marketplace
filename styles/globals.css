@@ -100,11 +100,21 @@ select {
   background-clip: text;
   text-fill-color: transparent;
 }
+.text-gradient-secondary {
+  background: linear-gradient(to left, #ff8d8d -100%, #7d12e7 151%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
 .tr:nth-child(even) {
   background-color: #0e0e10;
 }
 .tr:nth-child(odd) {
   background-color: #1f1f21;
+}
+.steps-text {
+  writing-mode: vertical-rl;
 }
 
 /* //Slider */

@@ -11,6 +11,12 @@ import { zeroPad } from "ethers/lib/utils";
 import NftCarousel from "../components/NftCarousel";
 import Loading from "../components/Loading";
 import Contact from "../components/Contact";
+import Image from "next/image";
+import starIcon from "../public/images/star.svg";
+import circleIcon from "../public/images/circle.svg";
+import NftSteps from "../components/NftStep";
+import NftStep from "../components/NftStep";
+import { NFT_STEPS } from "../constants";
 
 const override: CSSProperties = {
   display: "block",
@@ -35,6 +41,27 @@ export default function Home() {
       </Head>
       <div className="">
         <Headers />
+        {/* Nft Steps */}
+        <div className="my-[120px] px-[75px]">
+          <div className="flex flex-col justify-center items-center w-full gap-3">
+            <p className="text-gradient-secondary text-xl font-normal uppercase flex gap-2">
+              TO BE CREATOR <Image src={starIcon} alt="marketplan" />
+            </p>
+            <h5 className="text-[32px] font-bold flex gap-3">
+              Create and Sell Your NFTs <Image src={circleIcon} alt="Create and Sell Your NFTs" />
+            </h5>
+          </div>
+          <div className="flex justify-center gap-[28px] mt-[82px]">
+            {NFT_STEPS?.map((step) => (
+              <NftStep
+                key={step.step}
+                title={step.title}
+                description={step.description}
+                step={step.step}
+              />
+            ))}
+          </div>
+        </div>
         {/* Explore Marketplace */}
         <div className="my-[120px] px-[75px] min-h-[600px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">
