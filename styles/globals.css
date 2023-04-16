@@ -10,6 +10,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  color: white;
 }
 
 /* Set core body defaults */
@@ -92,17 +93,24 @@ select {
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
 }
+.text-gradient {
+  background: linear-gradient(98.31deg, #ff8d8d -20.73%, #7d12e7 71.91%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
 
 /* //Slider */
-.slick-dots{
-  bottom:  -60px !important;
+.slick-dots {
+  bottom: -60px !important;
 }
-.slick-dots li{
+.slick-dots li {
   width: 30px !important;
   height: 30px !important;
   margin: 0 12px !important;
 }
-.slick-dots li button:before{
-  color: #D9D8E2 !important;
+.slick-dots li button:before {
+  color: #d9d8e2 !important;
   font-size: 30px !important;
 }
