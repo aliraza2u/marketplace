@@ -24,7 +24,7 @@ const NftStep: FC<INftStepProps> = ({ step, title, description }) => {
           <p className="nft-step-name text-2xl font-semibold text-white flex justify-center items-center">
             {title}
           </p>
-          <p className="nft-step-description w-[80%] hidden">{description}</p>
+          <p className="nft-step-description w-[80%] font-semibold hidden">{description}</p>
           <Image
             src={image1}
             alt={description}
