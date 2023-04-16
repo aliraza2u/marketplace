@@ -92,3 +92,17 @@ select {
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
 }
+
+/* //Slider */
+.slick-dots{
+  bottom:  -60px !important;
+}
+.slick-dots li{
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 12px !important;
+}
+.slick-dots li button:before{
+  color: #D9D8E2 !important;
+  font-size: 30px !important;
+}
