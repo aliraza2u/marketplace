@@ -37,7 +37,7 @@ const Card: FC<ICardProps> = ({ name, image, price, symbol, user, onClick }) => 
               alt="marketplan"
               className="w-9 h-9 rounded-full object-contain"
             />
-            <h3 className="capitalize text-xl font-medium">{"Loura chin"}</h3>
+            <h3 className="capitalize text-xl font-medium text-textBlack">{"Loura chin"}</h3>
           </div>
           <Button className="text-[19px] font-medium text-white rounded-xl w-full py-2  collect-button">
             Buy it now
