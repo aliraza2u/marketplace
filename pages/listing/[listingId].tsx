@@ -9,9 +9,11 @@ import {
 } from "@thirdweb-dev/react";
 import { ChainId, ListingType, Marketplace, NATIVE_TOKENS } from "@thirdweb-dev/sdk";
 import type { NextPage } from "next";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { marketplaceContractAddress } from "../../addresses";
+import Table from "../../components/Table/Table";
 import styles from "../../styles/Home.module.css";
 
 const ListingPage: NextPage = () => {
@@ -100,7 +102,7 @@ const ListingPage: NextPage = () => {
   return (
     <div className={styles.container}>
       <h2 className="font-extrabold text-[64px] leading-[77px] tracking-wide mt-[190px] mb-[100px]">
-        Our Best creators
+        Item details
       </h2>
 
       <div className={styles.listingContainer}>
@@ -126,23 +128,47 @@ const ListingPage: NextPage = () => {
               {listing.buyoutCurrencyValuePerToken.symbol}
             </p>
           </div>
-          <p>
-            Owned by{" "}
-            <b>
-              {listing.sellerAddress?.slice(0, 6) + "..." + listing.sellerAddress?.slice(36, 40)}
-            </b>
-          </p>
+          <div className="w-full max-w-[618px] h-auto min-h-[100px] bg-[#16192A] border-2 border-[#2E3150] rounded-xl pt-12 pb-8  px-10 mb-10">
+            <p className="text-[#878788] font-medium text-xl leading-9 tracking-wide capitalize mb-7">
+              {listing?.asset?.description}
+            </p>
+            <div className="flex items-center">
+              <Image
+                src="/images/dummy_person.png"
+                alt="person-img"
+                width={64}
+                height={64}
+                className="mr-4"
+              />
+              <div>
+                <p className="font-medium text-xl leading-6 mb-2">
+                  @
+                  {listing.sellerAddress?.slice(0, 6) +
+                    "..." +
+                    listing.sellerAddress?.slice(36, 40)}
+                </p>
+                <p className="font-medium text-[15px] leading-[16px] text-[#878788]">Owner</p>
+              </div>
+            </div>
+            <div className="mt-7">
+              <p>
+                <b className="font-extrabold text-xl leading-6 capitalize tracking-wide mr-3">
+                  Token ID:
+                </b>
+                <span className="text-[#878788] font-normal text-xl ">
+                  {listing.asset.name?.toString().split("#")[1] || "N/A"}
+                </span>
+              </p>
+            </div>
+          </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: 20,
-              alignItems: "center",
-            }}
-          >
-            <button style={{ borderStyle: "none" }} className={styles.mainButton} onClick={buyNft}>
-              Buy
+          <div className="flex gap-5 items-center w-full">
+            <button
+              style={{ borderStyle: "none" }}
+              className="uppercase font-bold text-base text-white gap-2 px-6 py-3 rounded-xl walletConnectButton  text-center !flex !items-center !justify-center flex-1 "
+              onClick={buyNft}
+            >
+              BUY IT NOW
             </button>
             <p style={{ color: "grey" }}>|</p>
             <div
@@ -162,7 +188,7 @@ const ListingPage: NextPage = () => {
                 style={{ marginTop: 0, marginLeft: 0, width: 128 }}
               />
               <button
-                className={styles.mainButton}
+                className={`${styles.mainButton} ml-2`}
                 onClick={createBidOrOffer}
                 style={{
                   borderStyle: "none",
@@ -175,7 +201,7 @@ const ListingPage: NextPage = () => {
             </div>
           </div>
           {/* Starting the Cancel operation from here */}
-          <div>
+          {/* <div>
             <Web3Button
               contractAddress={marketplaceContractAddress}
               action={() =>
@@ -187,9 +213,15 @@ const ListingPage: NextPage = () => {
             >
               Cancel Listing
             </Web3Button>
-          </div>
+          </div> */}
           {/* Ending the cancle operation here */}
         </div>
+      </div>
+      <div className="max-w-[90vw] w-full mt-36">
+        <h2 className="font-bold leading-[68px] text-[56px] tracking-wide text-center mb-12">
+          Related NFTs
+        </h2>
+        <Table assetDetails={listing} />
       </div>
     </div>
   );

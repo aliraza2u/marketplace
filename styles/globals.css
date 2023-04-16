@@ -100,6 +100,12 @@ select {
   background-clip: text;
   text-fill-color: transparent;
 }
+.tr:nth-child(even) {
+  background-color: #0e0e10;
+}
+.tr:nth-child(odd) {
+  background-color: #1f1f21;
+}
 
 /* //Slider */
 .slick-dots {
