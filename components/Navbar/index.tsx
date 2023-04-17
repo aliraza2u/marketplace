@@ -7,13 +7,13 @@ import Button from "../Button";
 import logo from "../../public/images/logo.png";
 import discord from "../../public/images/discord.svg";
 import wallet from "../../public/images/wallet.svg";
+import hamburger from "../../public/images/hamburger.svg";
 
 const Navbar: FC = () => {
   const address = useAddress();
   const connectWithMetamask = useMetamask();
   const disconnect = useDisconnect();
   const [color, setColor] = useState(false);
-  
 
   useEffect(() => {
     window.addEventListener("scroll", changeColor);
@@ -27,15 +27,19 @@ const Navbar: FC = () => {
 
   return (
     <div
-      className={`flex justify-between items-center px-[78px] w-full fixed z-10 py-4 ${
+      className={`px-4 flex justify-between items-center lg:px-[78px] w-full fixed z-10 py-4 ${
         color ? "bg-night py-2" : "bg-transparent"
       }`}
     >
       <div className="flex items-center gap-2">
-        <Image src={logo} alt="NITFEE" className="w-[72px] h-[70px] object-contain" />
-        <h1 className="text-white text-[32px] font-bold uppercase">NITFEE</h1>
+        <Image
+          src={logo}
+          alt="NITFEE"
+          className="w-[46px] h-[48px] lg:w-[72px] lg:h-[70px] object-contain"
+        />
+        <h1 className="text-2xl text-white lg:text-[32px] font-bold uppercase">NITFEE</h1>
       </div>
-      <div className="flex gap-9">
+      <div className="hidden lg:flex gap-9">
         {NAVBAR?.map((item) => (
           <Link
             key={item.name}
@@ -46,8 +50,11 @@ const Navbar: FC = () => {
           </Link>
         ))}
       </div>
-      <div className="flex gap-5">
-        <Button className="uppercase font-bold text-base text-white flex gap-2 items-center" type="transparent">
+      <div className="hidden lg:flex gap-5">
+        <Button
+          className="uppercase font-bold text-base text-white flex gap-2 items-center"
+          type="transparent"
+        >
           <Image src={discord} alt="marketplan nitfee discord" className="w-6 h-4 object-contain" />
           Discord
         </Button>
@@ -65,6 +72,10 @@ const Navbar: FC = () => {
           <Image src={wallet} alt="marketplan nitfee discord" className="w-6 h-4 object-contain" />
           {address ? "Disconnect" : "Connect"}
         </Button>
+      </div>
+      {/* // Mobie screeen */}
+      <div className="lg:hidden">
+        <Image src={hamburger} alt="" className="object-contain" />
       </div>
     </div>
   );
