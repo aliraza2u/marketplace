@@ -192,6 +192,27 @@ select {
   font-family: "Advent Pro", sans-serif;
   /* transform: translate(0%, 15px); */
 }
+/* Steps */
+.nft-step-box-sm:hover .nft-step-line-sm{
+  display: none;
+}
+.nft-step-box-sm:hover .nft-step-content-sm{
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.nft-step-box-sm:hover .nft-step-image-sm{
+  display: block;
+}
+.nft-step-box-sm:hover .nft-step-name-sm{
+  position: absolute;
+  top: 40%;
+}
+.nft-step-box-sm:hover .nft-step-description-sm{
+  display: block;
+  position: absolute;
+  top: 55%;
+}
 
 /* //Slider */
 .slick-dots {

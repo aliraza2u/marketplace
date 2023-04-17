@@ -42,16 +42,16 @@ export default function Home() {
       <div className="">
         <Headers />
         {/* Nft Steps */}
-        <div className="my-[120px] px-[75px]">
+        <div className="px-4 my-[120px] lg:px-[75px]">
           <div className="flex flex-col justify-center items-center w-full gap-3">
             <p className="text-gradient-secondary text-xl font-normal uppercase flex gap-2">
               TO BE CREATOR <Image src={starIcon} alt="marketplan" />
             </p>
-            <h5 className="text-[32px] font-bold flex gap-3">
-              Create and Sell Your NFTs <Image src={circleIcon} alt="Create and Sell Your NFTs" />
+            <h5 className="text-[28px] lg:text-[32px] font-bold flex lg:gap-3">
+              Create and Sell Your NFTs <Image src={circleIcon} alt="Create and Sell Your NFTs" className="relative top-[-16px] lg:top-0" />
             </h5>
           </div>
-          <div className="flex justify-center items-end gap-10 mt-12 h-[438px]">
+          <div className=" block lg:flex justify-center items-end gap-10 mt-12 lg:h-[438px]">
             {NFT_STEPS?.map((step) => (
               <NftStep
                 key={step.step}
