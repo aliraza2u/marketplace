@@ -14,7 +14,7 @@ interface ICardProps {
 
 const Card: FC<ICardProps> = ({ name, image, price, symbol, user, onClick }) => {
   return (
-    <div className="w-[280px] h-[588px]" onClick={onClick}>
+    <div className="w-[280px] h-[550px]" onClick={onClick}>
       <div className="">
         {image && (
           <img src={image} alt="" className="w-[280px] h-[370px] rounded-[20px] object-cover" />

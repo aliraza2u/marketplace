@@ -99,20 +99,20 @@ export default function Home() {
           )}
         </div>
         {/* Newly listed */}
-        <div className="my-[120px] px-[75px] min-h-[600px]">
+        <div className="my-[120px] px-[75px] min-h-[500px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
 
         {/* Recently sold */}
-        <div className="my-[120px] px-[75px] min-h-[600px]">
+        <div className="my-[120px] px-[75px] min-h-[500px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
         {/* Contact us */}
-        <div className="my-[120px] px-[75px]">
+        {/* <div className="my-[120px] px-[75px]">
           <Contact />
-        </div>
+        </div> */}
       </div>
     </>
   );
