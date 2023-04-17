@@ -77,7 +77,7 @@ select {
 }
 .rouded-button {
   position: relative;
-  padding: 12px 32px;
+  /* padding: 12px 32px; */
 }
 .rouded-button::after {
   content: "";
@@ -86,7 +86,7 @@ select {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 28px;
+  border-radius: 50px;
   border: 2px solid transparent;
   background: linear-gradient(90deg, #ff8d8d, #7d12e7) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);

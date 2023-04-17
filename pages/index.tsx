@@ -64,10 +64,10 @@ export default function Home() {
         </div>
         {/* Explore Marketplace */}
         <div className="px-6 my-[120px] md:px-[75px] min-h-[600px]">
-          <h1 className="text-[59px] font-semibold text-white text-center mb-12">
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
             Explore Marketplace
           </h1>
-          <div className="flex justify-center gap-5 mb-12">
+          <div className="flex justify-center gap-5 mb-12 overflow-x-scroll ">
             {CATEGORIES?.map((category, i) => (
               <Button key={category} type="rounded" className="">
                 {category}
@@ -99,14 +99,14 @@ export default function Home() {
           )}
         </div>
         {/* Newly listed */}
-        <div className="my-[120px] px-[75px] min-h-[500px]">
-          <h1 className="text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
+        <div className="px-4 my-[120px] lg:px-[75px] min-h-[500px]">
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
 
         {/* Recently sold */}
-        <div className="my-[120px] px-[75px] min-h-[500px]">
-          <h1 className="text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
+        <div className="px-4 my-[120px] lg:px-[75px] min-h-[500px]">
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
         {/* Contact us */}
