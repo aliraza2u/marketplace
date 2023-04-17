@@ -145,8 +145,8 @@ select {
   font-weight: 600;
   width: 50%;
   z-index: 1;
-  -webkit-animation: fadeIn .6s;
-  animation: fadeIn .6s;
+  -webkit-animation: fadeIn 0.6s;
+  animation: fadeIn 0.6s;
 }
 .nft-step-box:hover .nft-step-image {
   display: block;
@@ -167,9 +167,30 @@ select {
   position: absolute;
   top: 75%;
   left: 8%;
-  text-shadow: 0px 0px 1px #05050F;
+  text-shadow: 0px 0px 1px #05050f;
   -webkit-animation: fadeIn 1.2s;
   animation: fadeIn 1.2s;
+}
+
+/* //! Mobile screen styles */
+.hand-img-sm {
+  transform: translate(0, 0);
+}
+.nitfee-text-sm {
+  background: linear-gradient(180deg, #ffffff 18.62%, rgba(255, 255, 255, 0) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "Advent Pro", sans-serif;
+  /* transform: translate(70px, 10px); */
+}
+.conflux-text-sm{
+  background: linear-gradient(272.64deg, #ff8d8d 0.86%, #7d12e7 68.2%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "Advent Pro", sans-serif;
+  /* transform: translate(0%, 15px); */
 }
 
 /* //Slider */
