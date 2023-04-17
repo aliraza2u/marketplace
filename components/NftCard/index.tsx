@@ -14,7 +14,7 @@ interface INftCardProps {
 const NftCard: FC<INftCardProps> = ({ name, image, price, symbol, user, onClick }) => {
   return (
     <div
-      className="nft-card flex flex-col items-center gap-[27px] px-[10px] py-[15px]  w-[297px] h-[425px] rounded-[20px] bg-[#FFFFFF1A] mb-11"
+      className="nft-card flex flex-shrink-0 flex-grow-0 basis-[300px] md:flex-shrink-[auto] md:flex-grow-[auto] md:basis-[auto] flex-col items-center gap-[27px] px-[10px] py-[15px]  w-[297px] h-[425px] rounded-[20px] bg-[#FFFFFF1A] mb-11"
       onClick={onClick}
     >
       {name && image && (

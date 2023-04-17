@@ -63,7 +63,7 @@ export default function Home() {
           </div>
         </div>
         {/* Explore Marketplace */}
-        <div className="my-[120px] px-[75px] min-h-[600px]">
+        <div className="px-6 my-[120px] md:px-[75px] min-h-[600px]">
           <h1 className="text-[59px] font-semibold text-white text-center mb-12">
             Explore Marketplace
           </h1>
@@ -77,7 +77,7 @@ export default function Home() {
           {isLoading ? (
             <Loading isLoading={isLoading} />
           ) : (
-            <div className="grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
+            <div className="flex w-full overflow-x-scroll md:overflow-auto md:grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
               {data &&
                 data?.map((item) => (
                   <NftCard
