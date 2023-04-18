@@ -40,37 +40,42 @@ const Header = () => {
         <h1 className="conflux-text-sm text-[96px] leading-[96px] font-bold absolute top-[22%] break-words text-center">
           Conflux Espace
         </h1>
-        <div className="flex gap-6 items-center z-[1] top-[70%] absolute lg:hidden">
-          <Button
-            className="uppercase font-bold text-base text-white flex gap-2 items-center"
-            type="transparent"
-          >
-            <Image
-              src={discord}
-              alt="marketplan nitfee discord"
-              className="w-6 h-4 object-contain"
-            />
-            Discord
-          </Button>
-          {address && (
-            <p className="font-medium text-white px-6 py-3 rounded-xl border border-[#141B22] min-w-[154px]">
-              {address?.slice(0, 6).concat("...").concat(address?.slice(-4))}
-            </p>
-          )}
-          <Button
-            className="uppercase font-bold text-base text-white flex gap-2 items-center px-6 py-3 rounded-xl walletConnectButton"
-            onClick={() => {
-              address ? disconnect() : connectWithMetamask();
-            }}
-          >
-            <Image
-              src={wallet}
-              alt="marketplan nitfee discord"
-              className="w-6 h-4 object-contain"
-            />
-            {address ? "Disconnect" : "Connect"}
-          </Button>
+        <div className={`z-[1] absolute lg:hidden ${address?"top-[65%]":"top-[70%]"}`}>
+          <div className="flex gap-6 items-center">
+            <Button
+              className="uppercase font-bold text-base text-white flex gap-2 items-center"
+              type="transparent"
+            >
+              <Image
+                src={discord}
+                alt="marketplan nitfee discord"
+                className="w-6 h-4 object-contain"
+              />
+              Discord
+            </Button>
+            <Button
+              className="uppercase font-bold text-base text-white flex gap-2 items-center px-6 py-3 rounded-xl walletConnectButton"
+              onClick={() => {
+                address ? disconnect() : connectWithMetamask();
+              }}
+            >
+              <Image
+                src={wallet}
+                alt="marketplan nitfee discord"
+                className="w-6 h-4 object-contain"
+              />
+              {address ? "Disconnect" : "Connect"}
+            </Button>
+          </div>
+          <div className="mt-4 text-center">
+            {address && (
+              <p className="font-medium text-white px-6 py-3 rounded-xl border border-[#696969] w-[154px]">
+                {address?.slice(0, 6).concat("...").concat(address?.slice(-4))}
+              </p>
+            )}
+          </div>
         </div>
+
         <div className="absolute z-[1] top-[80%] flex justify-center">
           <h2 className="font-semibold text-[20px] text-white w-full text-center">
             Explore rare and valuable digital assets on our NFT marketplace. Buy, sell, and earn
