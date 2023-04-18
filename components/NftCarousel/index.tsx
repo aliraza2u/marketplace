@@ -30,6 +30,7 @@ const NftCarousel: FC<INftCarouselProps> = ({ listing }) => {
           symbol={item.buyoutCurrencyValuePerToken.symbol}
           user={"@user"}
           image={item.asset.image}
+          listerId={item.sellerAddress}
           onClick={() => push(`/listing/${item.id}`)}
         />
       ))}

@@ -1,5 +1,5 @@
-import React, { useState, CSSProperties } from "react";
-import { useActiveListings, useContract } from "@thirdweb-dev/react";
+import React, { useState, CSSProperties, useEffect } from "react";
+import { useActiveListings, useContract, useListing, useSigner } from "@thirdweb-dev/react";
 import Headers from "../components/Header";
 import NftCard from "../components/NftCard";
 import { marketplaceContractAddress } from "../addresses";
@@ -24,9 +24,38 @@ const override: CSSProperties = {
 };
 
 export default function Home() {
+  const [recentlyAdded, setRecentlyAdded] = useState<any>([]);
   const router = useRouter();
   const { contract } = useContract(marketplaceContractAddress, "marketplace");
   const { data, isLoading, error } = useActiveListings(contract);
+  const signer = useSigner();
+  const provider = signer?.provider;
+
+  useEffect(() => {
+    (async () => {
+      if (!contract) return;
+      let currentBlock = (await provider?.getBlockNumber()) || 8900000;
+      const newlyAdded = await contract?.events.getEvents("ListingAdded", {
+        fromBlock: currentBlock - 100000,
+        toBlock: currentBlock,
+        order: "desc",
+      });
+
+      const newlyAddedIds = newlyAdded.map((e) => e?.data?.listingId?.toString()).splice(0, 5);
+
+      let newlyAddedData = [];
+      for (let i = 0; i < newlyAddedIds.length; i++) {
+        try {
+          let result = await contract.getListing(newlyAddedIds[i]);
+          newlyAddedData.push(result);
+          if (newlyAddedData.length == 4) break;
+        } catch (e) {
+          continue;
+        }
+      }
+      setRecentlyAdded(newlyAddedData);
+    })();
+  }, [contract, provider]);
 
   return (
     <>
@@ -48,7 +77,12 @@ export default function Home() {
               TO BE CREATOR <Image src={starIcon} alt="marketplan" />
             </p>
             <h5 className="text-[28px] lg:text-[32px] font-bold flex lg:gap-3">
-              Create and Sell Your NFTs <Image src={circleIcon} alt="Create and Sell Your NFTs" className="relative top-[-16px] lg:top-0" />
+              Create and Sell Your NFTs{" "}
+              <Image
+                src={circleIcon}
+                alt="Create and Sell Your NFTs"
+                className="relative top-[-16px] lg:top-0"
+              />
             </h5>
           </div>
           <div className="block lg:flex justify-center items-end gap-10 mt-12 lg:h-[438px]">
@@ -100,13 +134,17 @@ export default function Home() {
         </div>
         {/* Newly listed */}
         <div className="px-4 my-[60px] lg:my-[120px] lg:px-[75px] min-h-[500px]">
-          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
-          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
+            Newly Listed
+          </h1>
+          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={recentlyAdded} />}
         </div>
 
         {/* Recently sold */}
         <div className="px-4 my-[60px] lg:my-[120px] lg:px-[75px] min-h-[500px]">
-          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
+            Recently Sold
+          </h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
         {/* Contact us */}

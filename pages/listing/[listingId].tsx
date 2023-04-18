@@ -15,6 +15,9 @@ import {
   useMinimumNextBid,
   useAuctionWinner,
   useWinningBid,
+  useContractEvents,
+  useAddress,
+  useSigner,
 } from "@thirdweb-dev/react";
 import { ChainId, ListingType, Marketplace, NATIVE_TOKENS } from "@thirdweb-dev/sdk";
 import type { NextPage } from "next";
@@ -37,6 +40,8 @@ const ListingPage: NextPage = () => {
   // Hooks to detect user is on the right network and switch them if they are not
   const networkMismatch = useNetworkMismatch();
   // const [, switchNetwork] = useNetwork();
+
+  const address = useAddress();
 
   // Initialize the marketplace contract
   const { contract } = useContract(marketplaceContractAddress, "marketplace");
@@ -78,6 +83,9 @@ const ListingPage: NextPage = () => {
   const { data: winningBid } = useWinningBid(contract, listingId);
   console.log(winningBid, "winningBid");
 
+  //fetching contract events
+  const { data } = useContractEvents(contract);
+  console.log("eventBuy", data);
   console.log(listing, "listingData");
   async function createBidOrOffer() {
     try {
@@ -117,28 +125,41 @@ const ListingPage: NextPage = () => {
       alert(error);
     }
   }
+
+  const cancelListingHandler = async () => {
+    try {
+      await cancelListing({
+        id: listingId,
+        type: listing?.type == 0 ? 0 : 1,
+      });
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   function dhm(ms: number) {
-    const days = Math.floor(ms / (24 * 60 * 60 * 1000));
-    const daysms = ms % (24 * 60 * 60 * 1000);
-    const hours = Math.floor(daysms / (60 * 60 * 1000));
-    const hoursms = ms % (60 * 60 * 1000);
-    const minutes = Math.floor(hoursms / (60 * 1000));
-    const minutesms = ms % (60 * 1000);
-    const sec = Math.floor(minutesms / 1000);
+    const days = Math.floor(ms / (24 * 60 * 60 * 500));
+    const daysms = ms % (24 * 60 * 60 * 500);
+    const hours = Math.floor(daysms / (60 * 60 * 500));
+    const hoursms = ms % (60 * 60 * 500);
+    const minutes = Math.floor(hoursms / (60 * 500));
+    const minutesms = ms % (60 * 500);
+    const sec = Math.floor(minutesms / 500);
     if (days > 0) return days + " days " + hours + ":" + minutes + ":" + sec;
     else return hours + ":" + minutes + ":" + sec;
   }
 
   let msTillEnd = 166660000;
   // if (listing?.secondsUntilEnd)
-  //   msTillEnd = new Date(+listing?.secondsUntilEnd?.toString() * 1000) - new Date().getTime() || 0;
+  //   msTillEnd = new Date(+listing?.secondsUntilEnd?.toString() * 500) - new Date().getTime() || 0;
   // else {
   //   //endTimeInEpochSeconds
   //   msTillEnd=
-  //     new Date(+listing?.endTimeInEpochSeconds?.toString() * 1000) - new Date().getTime() || 0;
+  //     new Date(+listing?.endTimeInEpochSeconds?.toString() * 500) - new Date().getTime() || 0;
   // }
 
   // console.log("secondstillend", dhm(msTillEnd));
+
   if (loadingListing) {
     return <div className={styles.loadingOrError}>Loading...</div>;
   }
@@ -148,8 +169,8 @@ const ListingPage: NextPage = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <h2 className="font-extrabold text-[64px] leading-[77px] tracking-wide mt-[190px] mb-[100px]">
+    <div className={`${styles.container} mb-10`}>
+      <h2 className="font-extrabold text-[64px] leading-[77px] tracking-wide mt-[190px] mb-[500px]">
         Item details
       </h2>
 
@@ -183,7 +204,7 @@ const ListingPage: NextPage = () => {
               {listing.buyoutCurrencyValuePerToken.symbol}
             </p>
           </div>
-          <div className="w-full max-w-[618px] h-auto min-h-[100px] bg-[#16192A] border-2 border-[#2E3150] rounded-xl pt-12 pb-8  px-10 mb-10">
+          <div className="w-full max-w-[618px] h-auto min-h-[500px] bg-[#16192A] border-2 border-[#2E3150] rounded-xl pt-12 pb-8  px-10 mb-10">
             <p className="text-[#878788] font-medium text-xl leading-9 tracking-wide capitalize mb-7">
               {listing?.asset?.description}
             </p>
@@ -229,53 +250,67 @@ const ListingPage: NextPage = () => {
 
           {
             <div className="flex gap-5 items-center w-full">
-              <button
-                style={{ borderStyle: "none" }}
-                className="uppercase font-bold text-base text-white gap-2 px-6 py-3 rounded-xl walletConnectButton  text-center !flex !items-center !justify-center flex-1 "
-                onClick={buyNft}
-                disabled={msTillEnd < 0}
-              >
-                {msTillEnd < 0 ? (
-                  " (Listing Inactive)"
-                ) : (
-                  <span>
-                    BUY IT NOW ( {listing.buyoutCurrencyValuePerToken.displayValue}{" "}
-                    {listing.buyoutCurrencyValuePerToken.symbol})
-                  </span>
-                )}
-              </button>
-              <p style={{ color: "grey" }}>|</p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 8,
-                }}
-              >
-                <input
-                  type="text"
-                  name="bidAmount"
-                  className={styles.textInput}
-                  onChange={(e) => setBidAmount(e.target.value)}
-                  placeholder="Amount"
-                  style={{ marginTop: 0, marginLeft: 0, width: 128 }}
-                  value={bidAmount}
-                  disabled={msTillEnd < 0}
-                />
+              {address == listing.sellerAddress ? (
                 <button
-                  className={`${styles.mainButton} ml-2`}
-                  onClick={createBidOrOffer}
-                  disabled={msTillEnd < 0}
-                  style={{
-                    borderStyle: "none",
-                    background: "transparent",
-                    width: "fit-content",
-                  }}
+                  style={{ borderStyle: "none" }}
+                  className="uppercase font-bold text-base text-white gap-2 px-6 py-3 rounded-xl walletConnectButton  text-center !flex !items-center !justify-center flex-1 "
+                  onClick={cancelListingHandler}
                 >
-                  {listing.type == 0 ? "Make Offer" : "Bid Now"}
+                  Cancel Listing
                 </button>
-              </div>
+              ) : (
+                <button
+                  style={{ borderStyle: "none" }}
+                  className="uppercase font-bold text-base text-white gap-2 px-6 py-3 rounded-xl walletConnectButton  text-center !flex !items-center !justify-center flex-1 "
+                  onClick={buyNft}
+                  disabled={msTillEnd < 0}
+                >
+                  {msTillEnd < 0 ? (
+                    " (Listing Inactive)"
+                  ) : (
+                    <span>
+                      BUY IT NOW ( {listing.buyoutCurrencyValuePerToken.displayValue}{" "}
+                      {listing.buyoutCurrencyValuePerToken.symbol})
+                    </span>
+                  )}
+                </button>
+              )}
+              {address !== listing.sellerAddress && (
+                <>
+                  <p style={{ color: "grey" }}>|</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <input
+                      type="text"
+                      name="bidAmount"
+                      className={styles.textInput}
+                      onChange={(e) => setBidAmount(e.target.value)}
+                      placeholder="Amount"
+                      style={{ marginTop: 0, marginLeft: 0, width: 128 }}
+                      value={bidAmount}
+                      disabled={msTillEnd < 0}
+                    />
+                    <button
+                      className={`${styles.mainButton} ml-2`}
+                      onClick={createBidOrOffer}
+                      disabled={msTillEnd < 0}
+                      style={{
+                        borderStyle: "none",
+                        background: "transparent",
+                        width: "fit-content",
+                      }}
+                    >
+                      {listing.type == 0 ? "Make Offer" : "Bid Now"}
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           }
           <div className="h-6 flex justify-end w-full">
