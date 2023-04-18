@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import handImage from "../../public/images/hand-image.png";
 import handImageSm from "../../public/images/hero-hand-sm.png";
 import Button from "../Button";
-import facebook from "../../public/images/facebook.svg";
+import twitter from "../../public/images/twitter-logo.svg";
 import wallet from "../../public/images/wallet.svg";
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
 
@@ -47,11 +47,11 @@ const Header = () => {
               type="transparent"
             >
               <Image
-                src={facebook}
+                src={twitter}
                 alt="marketplan nitfee discord"
                 className="w-6 h-6 object-contain"
               />
-              Facebook
+              Twitter
             </Button>
             <Button
               className="uppercase font-bold text-base text-white flex gap-2 items-center px-6 py-3 rounded-xl walletConnectButton"

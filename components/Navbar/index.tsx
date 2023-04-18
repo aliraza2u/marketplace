@@ -5,7 +5,7 @@ import { useAddress, useMetamask, useDisconnect } from "@thirdweb-dev/react";
 import { NAVBAR } from "../../constants";
 import Button from "../Button";
 import logo from "../../public/images/logo.png";
-import facebook from "../../public/images/facebook.svg";
+import twitter from "../../public/images/twitter-logo.svg";
 import wallet from "../../public/images/wallet.svg";
 import hamburger from "../../public/images/hamburger.svg";
 import SlideDownMenu from "../SlideDownMenu";
@@ -58,11 +58,11 @@ const Navbar: FC = () => {
           type="transparent"
         >
           <Image
-            src={facebook}
+            src={twitter}
             alt="marketplan nitfee discord"
             className="w-6 h-6 object-contain"
           />
-          Facebook
+          Twitter
         </Button>
         {address && (
           <p className="font-medium text-white px-6 py-3 rounded-xl border border-[#141B22] min-w-[154px]">
