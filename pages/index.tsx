@@ -167,7 +167,7 @@ export default function Home() {
           <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
             Newly Listed
           </h1>
-          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={recentlyAdded} />}
+          {!recentlyAdded?.length ? <Loading isLoading={isLoading} /> : <NftCarousel listing={recentlyAdded} />}
         </div>
 
         {/* Recently sold */}
@@ -175,7 +175,7 @@ export default function Home() {
           <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
             Recently Sold
           </h1>
-          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={recentlySold} />}
+          {!recentlySold?.length ? <Loading isLoading={isLoading} /> : <NftCarousel listing={recentlySold} />}
         </div>
         {/* Contact us */}
         {/* <div className="my-[120px] px-[75px]">
