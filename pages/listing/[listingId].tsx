@@ -129,14 +129,15 @@ const ListingPage: NextPage = () => {
     else return hours + ":" + minutes + ":" + sec;
   }
 
-  let msTillEnd;
-  if (listing?.secondsUntilEnd)
-    msTillEnd = new Date(+listing?.secondsUntilEnd?.toString() * 1000) - new Date().getTime() || 0;
-  else {
-    //endTimeInEpochSeconds
-    msTillEnd =
-      new Date(+listing?.endTimeInEpochSeconds?.toString() * 1000) - new Date().getTime() || 0;
-  }
+  let msTillEnd = 166660000;
+  // if (listing?.secondsUntilEnd)
+  //   msTillEnd = new Date(+listing?.secondsUntilEnd?.toString() * 1000) - new Date().getTime() || 0;
+  // else {
+  //   //endTimeInEpochSeconds
+  //   msTillEnd=
+  //     new Date(+listing?.endTimeInEpochSeconds?.toString() * 1000) - new Date().getTime() || 0;
+  // }
+
   // console.log("secondstillend", dhm(msTillEnd));
   if (loadingListing) {
     return <div className={styles.loadingOrError}>Loading...</div>;
