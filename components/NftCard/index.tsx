@@ -17,8 +17,15 @@ const NftCard: FC<INftCardProps> = ({ name, image, price, symbol, user, onClick 
       className="nft-card flex flex-shrink-0 flex-grow-0 basis-[300px] md:flex-shrink-[auto] md:flex-grow-[auto] md:basis-[auto] flex-col items-center gap-[27px] px-[10px] py-[15px]  w-[297px] h-[425px] rounded-[20px] bg-[#FFFFFF1A] lg:mb-11"
       onClick={onClick}
     >
-      {name && image && (
-        <img src={image} alt={""} className="w-[276px] h-[307px] rounded-[14px] object-cover" />
+      {name && (
+        <img
+          src={
+            image ||
+            "https://ipfs.thirdwebcdn.com/ipfs/QmXodQe3XXXhL55wfbLt3T2kAhXuBbHp1TLHcqyEjYBC9w/img_subdao.png"
+          }
+          alt={""}
+          className="w-[276px] h-[307px] rounded-[14px] object-cover"
+        />
       )}
       <div className="w-full">
         <div className="flex justify-between">
