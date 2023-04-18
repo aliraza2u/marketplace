@@ -170,7 +170,7 @@ const ListingPage: NextPage = () => {
 
   return (
     <div className={`${styles.container} mb-10`}>
-      <h2 className="font-extrabold text-[64px] leading-[77px] tracking-wide mt-[190px] mb-[500px]">
+      <h2 className="font-extrabold text-[64px] leading-[77px] tracking-wide mt-[190px] mb-[100px]">
         Item details
       </h2>
 

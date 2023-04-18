@@ -31,17 +31,17 @@ export default function Home() {
   const { data, isLoading, error } = useActiveListings(contract);
   const signer = useSigner();
   const provider = signer?.provider;
-
+  //recently listed
   useEffect(() => {
     (async () => {
       if (!contract) return;
-      let currentBlock = (await provider?.getBlockNumber()) || 8900000;
+      let currentBlock = (await provider?.getBlockNumber()) || 890000000;
       const newlyAdded = await contract?.events.getEvents("ListingAdded", {
-        fromBlock: currentBlock - 100000,
-        toBlock: currentBlock,
+        // fromBlock: from,
+        // toBlock: currentBlock,
         order: "desc",
       });
-
+      console.log("newlyAddedids", newlyAdded);
       const newlyAddedIds = newlyAdded.map((e) => e?.data?.listingId?.toString()).splice(0, 5);
 
       let newlyAddedData = [];
@@ -54,9 +54,11 @@ export default function Home() {
           continue;
         }
       }
+      console.log("recently listed", newlyAddedData);
       setRecentlyAdded(newlyAddedData);
     })();
   }, [contract, provider]);
+  console.log("recently listed", recentlyAdded);
 
   //this useEffect will find recently sold NFTS
   useEffect(() => {
@@ -64,8 +66,8 @@ export default function Home() {
       if (!contract) return;
       let currentBlock = (await provider?.getBlockNumber()) || 8900000;
       const recentlySold = await contract?.events.getEvents("NewSale", {
-        fromBlock: currentBlock - 100000,
-        toBlock: currentBlock,
+        // fromBlock: currentBlock - 100000,
+        // toBlock: currentBlock,
         order: "desc",
       });
 
