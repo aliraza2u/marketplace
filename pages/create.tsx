@@ -28,10 +28,7 @@ const Create: NextPage = () => {
   // const [{ data, error, loading }, switchNetwork] = useNetwork();
   const connectWithMetamask = useMetamask();
   // Connect to our marketplace contract via the useContract hook
-  const { contract: marketplace } = useContract(
-    marketplaceContractAddress,
-    "marketplace"
-  );
+  const { contract: marketplace } = useContract(marketplaceContractAddress, "marketplace");
 
   const switchChain = useSwitchChain();
   const address = useAddress();
@@ -40,12 +37,10 @@ const Create: NextPage = () => {
 
   async function handleCreateListing(e: any) {
     try {
+      // if (chain?.name !== "Conflux eSpace") {
+      //   switchChain(ConfluxEspace.chainId);
+      // }
 
-      if (chain?.name !== "Conflux eSpace") {
-        switchChain(ConfluxEspace.chainId);
-      }
-
-      
       // Prevent page from refreshing
       e.preventDefault();
 
@@ -53,8 +48,7 @@ const Create: NextPage = () => {
       let transactionResult: undefined | TransactionResult = undefined;
 
       // De-construct data from form submission
-      const { listingType, contractAddress, tokenId, price } =
-        e.target.elements;
+      const { listingType, contractAddress, tokenId, price } = e.target.elements;
 
       // Depending on the type of listing selected, call the appropriate function
       // For Direct Listings:
@@ -62,7 +56,7 @@ const Create: NextPage = () => {
         transactionResult = await createDirectListing(
           contractAddress.value,
           tokenId.value,
-          price.value
+          price.value,
         );
       }
 
@@ -71,7 +65,7 @@ const Create: NextPage = () => {
         transactionResult = await createAuctionListing(
           contractAddress.value,
           tokenId.value,
-          price.value
+          price.value,
         );
       }
 
@@ -84,11 +78,7 @@ const Create: NextPage = () => {
     }
   }
 
-  async function createAuctionListing(
-    contractAddress: string,
-    tokenId: string,
-    price: string
-  ) {
+  async function createAuctionListing(contractAddress: string, tokenId: string, price: string) {
     try {
       const transaction = await marketplace?.auction.createListing({
         assetContractAddress: contractAddress, // Contract Address of the NFT
@@ -98,7 +88,7 @@ const Create: NextPage = () => {
         quantity: 1, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
         reservePricePerToken: 0, // Minimum price, users cannot bid below this amount
         startTimestamp: new Date(), // When the listing will start
-        tokenId: tokenId, // Token ID of the NFT.
+        tokenId: +tokenId, // Token ID of the NFT.
       });
 
       return transaction;
@@ -107,11 +97,7 @@ const Create: NextPage = () => {
     }
   }
 
-  async function createDirectListing(
-    contractAddress: string,
-    tokenId: string,
-    price: string
-  ) {
+  async function createDirectListing(contractAddress: string, tokenId: string, price: string) {
     try {
       const transaction = await marketplace?.direct.createListing({
         assetContractAddress: contractAddress, // Contract Address of the NFT
@@ -120,7 +106,7 @@ const Create: NextPage = () => {
         listingDurationInSeconds: 60 * 60 * 24 * 7, // When the auction will be closed and no longer accept bids (1 Week)
         quantity: 1, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
         startTimestamp: new Date(0), // When the listing will start
-        tokenId: tokenId, // Token ID of the NFT.
+        tokenId: +tokenId, // Token ID of the NFT.
       });
 
       return transaction;
@@ -128,18 +114,13 @@ const Create: NextPage = () => {
       console.error(error);
     }
   }
- 
-   
-
 
   return (
     <form onSubmit={(e) => handleCreateListing(e)}>
       <div className={styles.container}>
         {/* Form Section */}
         <div className={styles.collectionContainer}>
-          <h1 className={styles.ourCollection}>
-            Sell your NFT to the Nitfee Market:
-          </h1>
+          <h1 className={styles.ourCollection}>Sell your NFT to the Nitfee Market:</h1>
 
           {/* Toggle between direct listing and auction listing */}
           <div className={styles.listingTypeContainer}>
@@ -183,12 +164,7 @@ const Create: NextPage = () => {
           />
 
           {/* Sale Price For Listing Field */}
-          <input
-            type="text"
-            name="price"
-            className={styles.textInput}
-            placeholder="Sale Price"
-          />
+          <input type="text" name="price" className={styles.textInput} placeholder="Sale Price" />
 
           <button
             type="submit"

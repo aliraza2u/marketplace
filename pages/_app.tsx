@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { ConfluxEspace } from "@thirdweb-dev/chains";
+import { ConfluxEspace, Goerli } from "@thirdweb-dev/chains";
 import "../styles/globals.css";
 import Head from "next/head";
 import Layout from "../components/Layout";
@@ -14,7 +14,7 @@ const roboto = Roboto({
 });
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThirdwebProvider activeChain={ConfluxEspace}>
+    <ThirdwebProvider activeChain={Goerli}>
       <Head>
         <title>Nitfee Marketplace</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
