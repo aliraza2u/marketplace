@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import handImage from "../../public/images/hand-image.png";
 import handImageSm from "../../public/images/hero-hand-sm.png";
 import Button from "../Button";
-import discord from "../../public/images/discord.svg";
+import facebook from "../../public/images/facebook.svg";
 import wallet from "../../public/images/wallet.svg";
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
 
@@ -43,15 +43,15 @@ const Header = () => {
         <div className={`z-[1] absolute lg:hidden ${address ? "top-[62%]" : "top-[66%]"}`}>
           <div className="flex gap-6 items-center">
             <Button
-              className="uppercase font-bold text-base text-white flex gap-2 items-center"
+              className="uppercase text-base text-white flex gap-2 items-center"
               type="transparent"
             >
               <Image
-                src={discord}
+                src={facebook}
                 alt="marketplan nitfee discord"
-                className="w-6 h-4 object-contain"
+                className="w-6 h-6 object-contain"
               />
-              Discord
+              Facebook
             </Button>
             <Button
               className="uppercase font-bold text-base text-white flex gap-2 items-center px-6 py-3 rounded-xl walletConnectButton"

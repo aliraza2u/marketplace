@@ -5,7 +5,7 @@ import { useAddress, useMetamask, useDisconnect } from "@thirdweb-dev/react";
 import { NAVBAR } from "../../constants";
 import Button from "../Button";
 import logo from "../../public/images/logo.png";
-import discord from "../../public/images/discord.svg";
+import facebook from "../../public/images/facebook.svg";
 import wallet from "../../public/images/wallet.svg";
 import hamburger from "../../public/images/hamburger.svg";
 
@@ -52,11 +52,11 @@ const Navbar: FC = () => {
       </div>
       <div className="hidden lg:flex gap-5">
         <Button
-          className="uppercase font-bold text-base text-white flex gap-2 items-center"
+          className="uppercase text-base text-white flex gap-2 items-center"
           type="transparent"
         >
-          <Image src={discord} alt="marketplan nitfee discord" className="w-6 h-4 object-contain" />
-          Discord
+          <Image src={facebook} alt="marketplan nitfee discord" className="w-6 h-6 object-contain" />
+          Facebook
         </Button>
         {address && (
           <p className="font-medium text-white px-6 py-3 rounded-xl border border-[#141B22] min-w-[154px]">
