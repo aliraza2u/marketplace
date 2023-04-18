@@ -40,7 +40,7 @@ const Header = () => {
         <h1 className="conflux-text-sm text-[96px] leading-[96px] font-bold absolute top-[22%] break-words text-center">
           Conflux Espace
         </h1>
-        <div className={`z-[1] absolute lg:hidden ${address?"top-[65%]":"top-[70%]"}`}>
+        <div className={`z-[1] absolute lg:hidden ${address ? "top-[62%]" : "top-[66%]"}`}>
           <div className="flex gap-6 items-center">
             <Button
               className="uppercase font-bold text-base text-white flex gap-2 items-center"
@@ -67,7 +67,7 @@ const Header = () => {
               {address ? "Disconnect" : "Connect"}
             </Button>
           </div>
-          <div className="mt-4 text-center">
+          <div className="mt-4 flex justify-center">
             {address && (
               <p className="font-medium text-white px-6 py-3 rounded-xl border border-[#696969] w-[154px]">
                 {address?.slice(0, 6).concat("...").concat(address?.slice(-4))}
