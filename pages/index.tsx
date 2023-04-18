@@ -25,6 +25,7 @@ const override: CSSProperties = {
 
 export default function Home() {
   const [recentlyAdded, setRecentlyAdded] = useState<any>([]);
+  const [recentlySold, setRecentlySold] = useState<any>([]);
   const router = useRouter();
   const { contract } = useContract(marketplaceContractAddress, "marketplace");
   const { data, isLoading, error } = useActiveListings(contract);
@@ -57,6 +58,33 @@ export default function Home() {
     })();
   }, [contract, provider]);
 
+  //this useEffect will find recently sold NFTS
+  useEffect(() => {
+    (async () => {
+      if (!contract) return;
+      let currentBlock = (await provider?.getBlockNumber()) || 8900000;
+      const recentlySold = await contract?.events.getEvents("NewSale", {
+        fromBlock: currentBlock - 100000,
+        toBlock: currentBlock,
+        order: "desc",
+      });
+
+      const recentlySoldIds = recentlySold.map((e) => e?.data?.listingId?.toString()).splice(0, 5);
+
+      let recentlySoldData = [];
+      for (let i = 0; i < recentlySoldIds.length; i++) {
+        try {
+          let result = await contract.getListing(recentlySoldIds[i]);
+          recentlySoldData.push(result);
+          if (recentlySoldData.length == 4) break;
+        } catch (e) {
+          continue;
+        }
+      }
+      console.log("recentlySoldData", recentlySoldData);
+      setRecentlySold(recentlySoldData);
+    })();
+  }, [contract, provider]);
   return (
     <>
       <Head>
@@ -145,7 +173,7 @@ export default function Home() {
           <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
             Recently Sold
           </h1>
-          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
+          {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={recentlySold} />}
         </div>
         {/* Contact us */}
         {/* <div className="my-[120px] px-[75px]">
