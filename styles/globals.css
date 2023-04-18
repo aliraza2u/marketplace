@@ -77,7 +77,7 @@ select {
 }
 .rouded-button {
   position: relative;
-  padding: 12px 32px;
+  /* padding: 12px 32px; */
 }
 .rouded-button::after {
   content: "";
@@ -86,7 +86,7 @@ select {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 28px;
+  border-radius: 50px;
   border: 2px solid transparent;
   background: linear-gradient(90deg, #ff8d8d, #7d12e7) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
@@ -145,8 +145,8 @@ select {
   font-weight: 600;
   width: 50%;
   z-index: 1;
-  -webkit-animation: fadeIn .6s;
-  animation: fadeIn .6s;
+  -webkit-animation: fadeIn 0.6s;
+  animation: fadeIn 0.6s;
 }
 .nft-step-box:hover .nft-step-image {
   display: block;
@@ -167,14 +167,71 @@ select {
   position: absolute;
   top: 75%;
   left: 8%;
-  text-shadow: 0px 0px 1px #05050F;
+  text-shadow: 0px 0px 1px #05050f;
   -webkit-animation: fadeIn 1.2s;
   animation: fadeIn 1.2s;
 }
 
+/* //! Mobile screen styles */
+.hand-img-sm {
+  transform: translate(0, 0);
+}
+.nitfee-text-sm {
+  background: linear-gradient(180deg, #ffffff 18.62%, rgba(255, 255, 255, 0) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "Advent Pro", sans-serif;
+  /* transform: translate(70px, 10px); */
+}
+.conflux-text-sm {
+  background: linear-gradient(272.64deg, #ff8d8d 0.86%, #7d12e7 68.2%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "Advent Pro", sans-serif;
+  /* transform: translate(0%, 15px); */
+}
+/* Steps */
+.nft-step-box-sm {
+  transition: height 0.5s;
+}
+.nft-step-box-sm:hover {
+  height: 400px;
+}
+.nft-step-box-sm:hover .nft-step-line-sm {
+  display: none;
+}
+.nft-step-box-sm:hover .nft-step-content-sm {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.nft-step-box-sm:hover .nft-step-image-sm {
+  display: block;
+  -webkit-animation: fadeIn 0.4s;
+  animation: fadeIn 0.4s;
+}
+.nft-step-box-sm:hover .nft-step-name-sm {
+  position: absolute;
+  top: 40%;
+  -webkit-animation: fadeIn 0.8s;
+  animation: fadeIn 0.8s;
+}
+.nft-step-box-sm:hover .nft-step-description-sm {
+  display: block;
+  position: absolute;
+  top: 55%;
+  -webkit-animation: fadeIn 0.9s;
+  animation: fadeIn 0.9s;
+}
+.nft-step-box-sm:hover .nft-title-wrap-sm {
+  height: 80%;
+}
+
 /* //Slider */
 .slick-dots {
-  bottom: -60px !important;
+  bottom: 0px !important;
 }
 .slick-dots li {
   width: 30px !important;
@@ -184,6 +241,25 @@ select {
 .slick-dots li button:before {
   color: #d9d8e2 !important;
   font-size: 30px !important;
+}
+.slick-next {
+  top: 40% !important;
+  right: -6px !important;
+}
+.slick-prev {
+  left: 7px !important;
+  z-index: 1 !important;
+  top: 40% !important;
+}
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px !important;
+}
+@media (max-width: 600px) {
+  .slick-track {
+    display: flex !important;
+    gap: 1rem !important;
+  }
 }
 
 @-webkit-keyframes fadeIn {

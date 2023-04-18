@@ -21,7 +21,7 @@ const NftCarousel: FC<INftCarouselProps> = ({ listing }) => {
   const { push } = useRouter();
 
   return (
-    <Slider {...settings}>
+    <Slider {...settings} className="flex gap-4 md:block">
       {listing?.map((item: any) => (
         <Card
           key={item.name}
@@ -53,6 +53,7 @@ const settings = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
+        arrows: true,
         dots: true,
       },
     },
@@ -62,12 +63,13 @@ const settings = {
         slidesToShow: 2,
         slidesToScroll: 2,
         infinite: true,
-        dots: true,
+        dots: false,
       },
     },
     {
       breakpoint: 600,
       settings: {
+        dots: false,
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 1,
@@ -76,8 +78,10 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
+        dots: false,
         slidesToShow: 1,
         slidesToScroll: 1,
+        arrows: true,
       },
     },
   ],

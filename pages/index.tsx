@@ -42,16 +42,16 @@ export default function Home() {
       <div className="">
         <Headers />
         {/* Nft Steps */}
-        <div className="my-[120px] px-[75px]">
+        <div className="px-4 my-[60px] lg:my-[120px] lg:px-[75px]">
           <div className="flex flex-col justify-center items-center w-full gap-3">
             <p className="text-gradient-secondary text-xl font-normal uppercase flex gap-2">
               TO BE CREATOR <Image src={starIcon} alt="marketplan" />
             </p>
-            <h5 className="text-[32px] font-bold flex gap-3">
-              Create and Sell Your NFTs <Image src={circleIcon} alt="Create and Sell Your NFTs" />
+            <h5 className="text-[28px] lg:text-[32px] font-bold flex lg:gap-3">
+              Create and Sell Your NFTs <Image src={circleIcon} alt="Create and Sell Your NFTs" className="relative top-[-16px] lg:top-0" />
             </h5>
           </div>
-          <div className="flex justify-center items-end gap-10 mt-12 h-[438px]">
+          <div className="block lg:flex justify-center items-end gap-10 mt-12 lg:h-[438px]">
             {NFT_STEPS?.map((step) => (
               <NftStep
                 key={step.step}
@@ -63,11 +63,11 @@ export default function Home() {
           </div>
         </div>
         {/* Explore Marketplace */}
-        <div className="my-[120px] px-[75px] min-h-[600px]">
-          <h1 className="text-[59px] font-semibold text-white text-center mb-12">
+        <div className="px-6 my-[60px] lg:my-[120px] md:px-[75px] min-h-[600px]">
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
             Explore Marketplace
           </h1>
-          <div className="flex justify-center gap-5 mb-12">
+          <div className="flex justify-start lg:justify-center items-center gap-5 mb-12 overflow-x-scroll ">
             {CATEGORIES?.map((category, i) => (
               <Button key={category} type="rounded" className="">
                 {category}
@@ -77,7 +77,7 @@ export default function Home() {
           {isLoading ? (
             <Loading isLoading={isLoading} />
           ) : (
-            <div className="grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
+            <div className="flex w-full overflow-x-scroll md:overflow-auto md:grid grid-cols-3 min-[1390px]:grid-cols-4 gap-6 ">
               {data &&
                 data?.map((item) => (
                   <NftCard
@@ -99,20 +99,20 @@ export default function Home() {
           )}
         </div>
         {/* Newly listed */}
-        <div className="my-[120px] px-[75px] min-h-[600px]">
-          <h1 className="text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
+        <div className="px-4 my-[60px] lg:my-[120px] lg:px-[75px] min-h-[500px]">
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">Newly Listed</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
 
         {/* Recently sold */}
-        <div className="my-[120px] px-[75px] min-h-[600px]">
-          <h1 className="text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
+        <div className="px-4 my-[60px] lg:my-[120px] lg:px-[75px] min-h-[500px]">
+          <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">Recently Sold</h1>
           {isLoading ? <Loading isLoading={isLoading} /> : <NftCarousel listing={data} />}
         </div>
         {/* Contact us */}
-        <div className="my-[120px] px-[75px]">
+        {/* <div className="my-[120px] px-[75px]">
           <Contact />
-        </div>
+        </div> */}
       </div>
     </>
   );
