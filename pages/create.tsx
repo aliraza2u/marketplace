@@ -26,6 +26,13 @@ const Create: NextPage = () => {
   // Next JS Router hook to redirect to other pages
   const router = useRouter();
   const [active, setActive] = useState("directListing");
+  const [contractAddress, setContractAddress] = useState("");
+  const [tokenId, setTokenId] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [directPrice, setDirectPrice] = useState("");
+  const [buyoutPrice, setBuyoutPrice] = useState("");
+  const [reservePrice, setReservePrice] = useState("");
+  const [duration, setDuration] = useState("");
   const networkMismatch = useNetworkMismatch();
   // const [{ data, error, loading }, switchNetwork] = useNetwork();
   const connectWithMetamask = useMetamask();
@@ -38,6 +45,7 @@ const Create: NextPage = () => {
   const chain = useActiveChain();
 
   async function handleCreateListing(e: any) {
+    debugger;
     try {
       if (chain?.name !== "Conflux eSpace") {
         switchChain(ConfluxEspace.chainId);
@@ -50,24 +58,28 @@ const Create: NextPage = () => {
       let transactionResult: undefined | TransactionResult = undefined;
 
       // De-construct data from form submission
-      const { listingType, contractAddress, tokenId, price } = e.target.elements;
+      // const { listingType, contractAddress, tokenId, price } = e.target.elements;
 
       // Depending on the type of listing selected, call the appropriate function
       // For Direct Listings:
-      if (listingType.value === "directListing") {
+      if (active === "directListing") {
         transactionResult = await createDirectListing(
-          contractAddress.value,
-          tokenId.value,
-          price.value,
+          contractAddress,
+          tokenId,
+          directPrice,
+          quantity,
         );
       }
 
       // For Auction Listings:
-      if (listingType.value === "auctionListing") {
+      if (active === "auctionListing") {
         transactionResult = await createAuctionListing(
-          contractAddress.value,
-          tokenId.value,
-          price.value,
+          contractAddress,
+          tokenId,
+          quantity,
+          buyoutPrice,
+          reservePrice,
+          // duration,
         );
       }
 
@@ -80,15 +92,21 @@ const Create: NextPage = () => {
     }
   }
 
-  async function createAuctionListing(contractAddress: string, tokenId: string, price: string) {
+  async function createAuctionListing(
+    contractAddress: string,
+    tokenId: string,
+    quantity: string,
+    buyoutPrice: string,
+    reservePrice: string,
+  ) {
     try {
       const transaction = await marketplace?.auction.createListing({
         assetContractAddress: contractAddress, // Contract Address of the NFT
-        buyoutPricePerToken: price, // Maximum price, the auction will end immediately if a user pays this price.
+        buyoutPricePerToken: buyoutPrice, // Maximum price, the auction will end immediately if a user pays this price.
         currencyContractAddress: NATIVE_TOKEN_ADDRESS, // NATIVE_TOKEN_ADDRESS is the crpyto curency that is native to the network. i.e. Goerli ETH.
         listingDurationInSeconds: 60 * 60 * 24 * 7, // When the auction will be closed and no longer accept bids (1 Week)
-        quantity: 1, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
-        reservePricePerToken: 0, // Minimum price, users cannot bid below this amount
+        quantity: quantity, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
+        reservePricePerToken: reservePrice, // Minimum price, users cannot bid below this amount
         startTimestamp: new Date(), // When the listing will start
         tokenId: tokenId, // Token ID of the NFT.
       });
@@ -99,14 +117,19 @@ const Create: NextPage = () => {
     }
   }
 
-  async function createDirectListing(contractAddress: string, tokenId: string, price: string) {
+  async function createDirectListing(
+    contractAddress: string,
+    tokenId: string,
+    price: string,
+    quantity: string,
+  ) {
     try {
       const transaction = await marketplace?.direct.createListing({
         assetContractAddress: contractAddress, // Contract Address of the NFT
         buyoutPricePerToken: price, // Maximum price, the auction will end immediately if a user pays this price.
         currencyContractAddress: NATIVE_TOKEN_ADDRESS, // NATIVE_TOKEN_ADDRESS is the crpyto curency that is native to the network. i.e. Goerli ETH.
         listingDurationInSeconds: 60 * 60 * 24 * 7, // When the auction will be closed and no longer accept bids (1 Week)
-        quantity: 1, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
+        quantity: quantity, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
         startTimestamp: new Date(0), // When the listing will start
         tokenId: tokenId, // Token ID of the NFT.
       });
@@ -121,7 +144,9 @@ const Create: NextPage = () => {
     <div className="px-4 pt-[80px] lg:pt-[150px] flex justify-center mb-6">
       {/* Form Section */}
       <div className="flex flex-col justify-center gap-10 items-center w-full lg:w-[50%]">
-        <h1 className="conflux-text text-center text-3xl lg:text-5xl lg:mb-10 ">Sell your NFT to the Nitfee Market</h1>
+        <h1 className="conflux-text text-center text-3xl lg:text-5xl lg:mb-10 ">
+          Sell your NFT to the Nitfee Market
+        </h1>
         <div className="flex flex-col md:flex-row gap-6">
           <Button
             type={active === "directListing" ? "square" : "transparent"}
@@ -136,28 +161,6 @@ const Create: NextPage = () => {
             Auction Listing
           </Button>
         </div>
-        {/* Toggle between direct listing and auction listing */}
-        {/* <div>
-          <input
-            type="radio"
-            name="listingType"
-            id="directListing"
-            value="directListing"
-            defaultChecked
-            // className={styles.listingType}
-          />
-          <label htmlFor="directListing" className={styles.listingTypeLabel}>
-            Direct Listing
-          </label>
-          <input
-            type="radio"
-            name="listingType"
-            id="auctionListing"
-            value="auctionListing"
-            // className={styles.listingType}
-          />
-          <label htmlFor="auctionListing">Auction Listing</label>
-        </div> */}
 
         {/* NFT Contract Address Field */}
         <input
@@ -165,14 +168,19 @@ const Create: NextPage = () => {
           name="contractAddress"
           placeholder="NFT Contract Address"
           className="w-full p-4 rounded border border-[#696969] bg-transparent outline-none"
+          value={contractAddress}
+          onChange={(e) => setContractAddress(e.target.value)}
         />
 
         {/* NFT Token ID Field */}
         <input
+          required
           type="text"
           name="tokenId"
           placeholder="NFT Token ID"
           className="w-full p-4 rounded border border-[#696969] bg-transparent outline-none"
+          value={tokenId}
+          onChange={(e) => setTokenId(e.target.value)}
         />
 
         <input
@@ -180,14 +188,18 @@ const Create: NextPage = () => {
           name="quantity"
           placeholder="Quantity"
           className="w-full p-4 rounded border border-[#696969] bg-transparent outline-none"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
         />
         {/* Sale Price For Listing Field */}
         {active === "directListing" && (
           <input
             type="text"
-            name="price"
+            name="directPrice"
             placeholder="Sale Price"
             className="w-full p-4 rounded border border-[#696969] bg-transparent outline-none"
+            value={directPrice}
+            onChange={(e) => setDirectPrice(e.target.value)}
           />
         )}
 
@@ -197,6 +209,8 @@ const Create: NextPage = () => {
             name="Buyout Price Per Token"
             placeholder="Buyout Price Per Token (How much people would have to bid to instantly buy the asset)"
             className="w-full p-4 rounded border border-[#696969] bg-transparent outline-none"
+            value={buyoutPrice}
+            onChange={(e) => setBuyoutPrice(e.target.value)}
           />
         )}
         {/* // the minimum bid that will be accepted for the token */}
@@ -206,17 +220,27 @@ const Create: NextPage = () => {
             name="Reserve Price Per Token"
             placeholder="Reserve Price Per Token (The minimum bid that will be accepted for the token)"
             className="w-full p-4 rounded border border-[#696969] bg-transparent outline-none"
+            value={reservePrice}
+            onChange={(e) => setReservePrice(e.target.value)}
           />
         )}
         {active === "auctionList" && (
           <input
-            type="text"
+            required
+            type="date"
             name="duration"
             placeholder="Duration"
             className="w-full p-4 rounded border border-[#696969] bg-transparent outline-none"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
           />
         )}
-        <Button>List NFT</Button>
+        <button
+          onClick={(e) => handleCreateListing(e)}
+          className="walletConnectButton px-[36px] py-3 rounded-xl"
+        >
+          List NFT
+        </button>
       </div>
     </div>
   );
