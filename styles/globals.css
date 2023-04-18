@@ -193,6 +193,12 @@ select {
   /* transform: translate(0%, 15px); */
 }
 /* Steps */
+.nft-step-box-sm{
+  transition: height .5s;
+}
+.nft-step-box-sm:hover{
+  height: 400px;
+}
 .nft-step-box-sm:hover .nft-step-line-sm{
   display: none;
 }
@@ -203,15 +209,24 @@ select {
 }
 .nft-step-box-sm:hover .nft-step-image-sm{
   display: block;
+  -webkit-animation: fadeIn .4s;
+  animation: fadeIn .4s;
 }
 .nft-step-box-sm:hover .nft-step-name-sm{
   position: absolute;
   top: 40%;
+  -webkit-animation: fadeIn .8s;
+  animation: fadeIn .8s;
 }
 .nft-step-box-sm:hover .nft-step-description-sm{
   display: block;
   position: absolute;
   top: 55%;
+  -webkit-animation: fadeIn .9s;
+  animation: fadeIn .9s;
+}
+.nft-step-box-sm:hover .nft-title-wrap-sm{
+  height: 80%;
 }
 
 /* //Slider */

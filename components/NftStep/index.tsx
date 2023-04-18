@@ -35,11 +35,11 @@ const NftStep: FC<INftStepProps> = ({ step, title, description }) => {
         <Image src={bottomImage} alt={title} className="nft-trans-bottom-img hidden absolute left-0 bottom-0" /> */}
       </div>
       {/* Mobile screen */}
-      <div className="nft-step-box-sm w-full h-[100px]  border border-[#696969] rounded-[20px] hover:border-[2px] mb-6 hover:h-[400px] lg:hidden">
+      <div className="nft-step-box-sm w-full h-[100px]  border border-[#696969] rounded-[20px] hover:border-[2px] mb-6 lg:hidden">
         <div className="nft-step-content-sm flex gap-4 items-center h-full p-4">
           <p className="nft-step-count text-purple text-[32px] font-bold">{step}.</p>
           <div className="nft-step-line-sm h-full w-[1px] bg-slate-400"></div>
-          <div className="h-[80%] relative">
+          <div className="nft-title-wrap-sm relative">
             <div className="nft-text-wrap-sm">
               <p className="nft-step-name-sm text-2xl font-semibold text-white">{title}</p>
               <p className="nft-step-description-sm w-[90%] font-semibold hidden">{description}</p>
