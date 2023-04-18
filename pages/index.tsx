@@ -67,7 +67,7 @@ export default function Home() {
           <h1 className="text-[32px] lg:text-[59px] font-semibold text-white text-center mb-12">
             Explore Marketplace
           </h1>
-          <div className="flex justify-start items-center gap-5 mb-12 overflow-x-scroll ">
+          <div className="flex justify-start lg:justify-center items-center gap-5 mb-12 overflow-x-scroll ">
             {CATEGORIES?.map((category, i) => (
               <Button key={category} type="rounded" className="">
                 {category}
