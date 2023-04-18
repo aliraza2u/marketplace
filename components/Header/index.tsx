@@ -5,9 +5,13 @@ import handImageSm from "../../public/images/hero-hand-sm.png";
 import Button from "../Button";
 import twitter from "../../public/images/twitter-logo.svg";
 import wallet from "../../public/images/wallet.svg";
-import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
+import { metamaskWallet, useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
+import { useConnect } from "@thirdweb-dev/react";
+
 
 const Header = () => {
+  const connect = useConnect();
+  const metamask = metamaskWallet();
   const address = useAddress();
   const connectWithMetamask = useMetamask();
   const disconnect = useDisconnect();
@@ -58,7 +62,7 @@ const Header = () => {
             <Button
               className="uppercase font-bold text-base text-white flex gap-2 items-center px-6 py-3 rounded-xl walletConnectButton"
               onClick={() => {
-                address ? disconnect() : connectWithMetamask();
+                address ? disconnect() : connect(metamask);
               }}
             >
               <Image
