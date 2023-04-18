@@ -184,7 +184,7 @@ select {
   font-family: "Advent Pro", sans-serif;
   /* transform: translate(70px, 10px); */
 }
-.conflux-text-sm{
+.conflux-text-sm {
   background: linear-gradient(272.64deg, #ff8d8d 0.86%, #7d12e7 68.2%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -193,39 +193,39 @@ select {
   /* transform: translate(0%, 15px); */
 }
 /* Steps */
-.nft-step-box-sm{
-  transition: height .5s;
+.nft-step-box-sm {
+  transition: height 0.5s;
 }
-.nft-step-box-sm:hover{
+.nft-step-box-sm:hover {
   height: 400px;
 }
-.nft-step-box-sm:hover .nft-step-line-sm{
+.nft-step-box-sm:hover .nft-step-line-sm {
   display: none;
 }
-.nft-step-box-sm:hover .nft-step-content-sm{
+.nft-step-box-sm:hover .nft-step-content-sm {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
 }
-.nft-step-box-sm:hover .nft-step-image-sm{
+.nft-step-box-sm:hover .nft-step-image-sm {
   display: block;
-  -webkit-animation: fadeIn .4s;
-  animation: fadeIn .4s;
+  -webkit-animation: fadeIn 0.4s;
+  animation: fadeIn 0.4s;
 }
-.nft-step-box-sm:hover .nft-step-name-sm{
+.nft-step-box-sm:hover .nft-step-name-sm {
   position: absolute;
   top: 40%;
-  -webkit-animation: fadeIn .8s;
-  animation: fadeIn .8s;
+  -webkit-animation: fadeIn 0.8s;
+  animation: fadeIn 0.8s;
 }
-.nft-step-box-sm:hover .nft-step-description-sm{
+.nft-step-box-sm:hover .nft-step-description-sm {
   display: block;
   position: absolute;
   top: 55%;
-  -webkit-animation: fadeIn .9s;
-  animation: fadeIn .9s;
+  -webkit-animation: fadeIn 0.9s;
+  animation: fadeIn 0.9s;
 }
-.nft-step-box-sm:hover .nft-title-wrap-sm{
+.nft-step-box-sm:hover .nft-title-wrap-sm {
   height: 80%;
 }
 
@@ -241,6 +241,25 @@ select {
 .slick-dots li button:before {
   color: #d9d8e2 !important;
   font-size: 30px !important;
+}
+.slick-next {
+  top: 40% !important;
+  right: -6px !important;
+}
+.slick-prev {
+  left: 7px !important;
+  z-index: 1 !important;
+  top: 40% !important;
+}
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px !important;
+}
+@media (max-width: 600px) {
+  .slick-track {
+    display: flex !important;
+    gap: 1rem !important;
+  }
 }
 
 @-webkit-keyframes fadeIn {
