@@ -42,17 +42,19 @@ const Header = () => {
         </h1>
         <div className={`z-[1] absolute lg:hidden ${address ? "top-[62%]" : "top-[66%]"}`}>
           <div className="flex gap-6 items-center">
-            <Button
-              className="uppercase text-base text-white flex gap-2 items-center"
-              type="transparent"
-            >
-              <Image
-                src={twitter}
-                alt="marketplan nitfee discord"
-                className="w-6 h-6 object-contain"
-              />
-              Twitter
-            </Button>
+            <a href="https://twitter.com/nitfeemarketCFX" target={"_blank"}>
+              <Button
+                className="uppercase text-base text-white flex gap-2 items-center"
+                type="transparent"
+              >
+                <Image
+                  src={twitter}
+                  alt="marketplan nitfee discord"
+                  className="w-6 h-6 object-contain"
+                />
+                Twitter
+              </Button>
+            </a>
             <Button
               className="uppercase font-bold text-base text-white flex gap-2 items-center px-6 py-3 rounded-xl walletConnectButton"
               onClick={() => {
