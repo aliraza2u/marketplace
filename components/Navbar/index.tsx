@@ -5,15 +5,17 @@ import { useAddress, useMetamask, useDisconnect } from "@thirdweb-dev/react";
 import { NAVBAR } from "../../constants";
 import Button from "../Button";
 import logo from "../../public/images/logo.png";
-import facebook from "../../public/images/facebook.svg";
+import twitter from "../../public/images/twitter-logo.svg";
 import wallet from "../../public/images/wallet.svg";
 import hamburger from "../../public/images/hamburger.svg";
+import SlideDownMenu from "../SlideDownMenu";
 
 const Navbar: FC = () => {
   const address = useAddress();
   const connectWithMetamask = useMetamask();
   const disconnect = useDisconnect();
   const [color, setColor] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", changeColor);
@@ -55,8 +57,12 @@ const Navbar: FC = () => {
           className="uppercase text-base text-white flex gap-2 items-center"
           type="transparent"
         >
-          <Image src={facebook} alt="marketplan nitfee discord" className="w-6 h-6 object-contain" />
-          Facebook
+          <Image
+            src={twitter}
+            alt="marketplan nitfee discord"
+            className="w-6 h-6 object-contain"
+          />
+          Twitter
         </Button>
         {address && (
           <p className="font-medium text-white px-6 py-3 rounded-xl border border-[#141B22] min-w-[154px]">
@@ -75,8 +81,14 @@ const Navbar: FC = () => {
       </div>
       {/* // Mobie screeen */}
       <div className="lg:hidden">
-        <Image src={hamburger} alt="" className="object-contain" />
+        <Image
+          src={hamburger}
+          alt=""
+          className="object-contain"
+          onClick={() => setIsOpen(!isOpen)}
+        />
       </div>
+      {isOpen && <SlideDownMenu menu={NAVBAR} callback={setIsOpen} />}
     </div>
   );
 };
