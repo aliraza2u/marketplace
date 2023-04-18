@@ -47,9 +47,9 @@ const Create: NextPage = () => {
   async function handleCreateListing(e: any) {
     debugger;
     try {
-      if (chain?.name !== "Conflux eSpace") {
-        switchChain(ConfluxEspace.chainId);
-      }
+      // if (chain?.name !== "Conflux eSpace") {
+      //   switchChain(ConfluxEspace.chainId);
+      // }
 
       // Prevent page from refreshing
       e.preventDefault();
@@ -108,7 +108,7 @@ const Create: NextPage = () => {
         quantity: quantity, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
         reservePricePerToken: reservePrice, // Minimum price, users cannot bid below this amount
         startTimestamp: new Date(), // When the listing will start
-        tokenId: tokenId, // Token ID of the NFT.
+        tokenId: +tokenId, // Token ID of the NFT.
       });
 
       return transaction;
@@ -131,7 +131,7 @@ const Create: NextPage = () => {
         listingDurationInSeconds: 60 * 60 * 24 * 7, // When the auction will be closed and no longer accept bids (1 Week)
         quantity: quantity, // How many of the NFTs are being listed (useful for ERC 1155 tokens)
         startTimestamp: new Date(0), // When the listing will start
-        tokenId: tokenId, // Token ID of the NFT.
+        tokenId: +tokenId, // Token ID of the NFT.
       });
 
       return transaction;
