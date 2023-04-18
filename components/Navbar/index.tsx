@@ -53,17 +53,19 @@ const Navbar: FC = () => {
         ))}
       </div>
       <div className="hidden lg:flex gap-5">
-        <Button
-          className="uppercase text-base text-white flex gap-2 items-center"
-          type="transparent"
-        >
-          <Image
-            src={twitter}
-            alt="marketplan nitfee discord"
-            className="w-6 h-6 object-contain"
-          />
-          Twitter
-        </Button>
+        <a href="https://twitter.com/nitfeemarketCFX" target={"_blank"}>
+          <Button
+            className="uppercase text-base text-white flex gap-2 items-center"
+            type="transparent"
+          >
+            <Image
+              src={twitter}
+              alt="marketplan nitfee discord"
+              className="w-6 h-6 object-contain"
+            />
+            Twitter
+          </Button>
+        </a>
         {address && (
           <p className="font-medium text-white px-6 py-3 rounded-xl border border-[#141B22] min-w-[154px]">
             {address?.slice(0, 6).concat("...").concat(address?.slice(-4))}
