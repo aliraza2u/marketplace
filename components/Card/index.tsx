@@ -33,7 +33,7 @@ const Card: FC<ICardProps> = ({ name, image, price, symbol, user, onClick, liste
           <div className="flex justify-between gap-4">
             <h5 className=" capitalize font-extrabold text-textBlack">{"Lighting Axe"}</h5>
             <h5 className="nft-price text-[18px] font-extrabold uppercase">
-              {"100 "}
+              {price}
               {"cfx"}
             </h5>
           </div>
